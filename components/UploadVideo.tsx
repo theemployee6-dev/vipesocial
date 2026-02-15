@@ -106,7 +106,7 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
           processado.
         </p>
         <button
-          onClick={enviarParaAnalise}
+          onClick={() => window.location.reload()}
           className="px-8 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200"
         >
           🔄 Tentar Outra Vez
