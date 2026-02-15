@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { fetchFile } from "@ffmpeg/util";
 
 interface UploadVideoProps {
   aoFinalizar: (texto: string) => void;
@@ -14,6 +16,8 @@ const etapasIniciais = [
   { id: 3, label: "Chamando Viral Neuro-Architect", status: "esperando" },
   { id: 4, label: "Processando DNA Viral", status: "esperando" },
 ];
+
+const ffmpeg = new FFmpeg();
 
 export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
   // 1. Estados: São as "memórias" do componente
@@ -44,6 +48,49 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
     }
   };
 
+  const comprimirVideo = async (file: File): Promise<File> => {
+    if (!ffmpeg.loaded) {
+      await ffmpeg.load();
+    }
+
+    const inputName = "input.mp4";
+    const outputName = "output.mp4";
+
+    await ffmpeg.writeFile(inputName, await fetchFile(file));
+
+    // Compressão inteligente:
+    // - reduz bitrate
+    // - mantém qualidade aceitável
+    // - escala para 720p se for maior
+
+    await ffmpeg.exec([
+      "-i",
+      inputName,
+      "-vf",
+      "scale='min(1280,iw)':-2",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "veryfast",
+      "-crf",
+      "28",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "128k",
+      outputName,
+    ]);
+
+    const data = await ffmpeg.readFile(outputName);
+
+    // Converte corretamente para Uint8Array padrão
+    const blob = new Blob([new Uint8Array(data as Uint8Array)], {
+      type: "video/mp4",
+    });
+
+    return new File([blob], "comprimido.mp4", { type: "video/mp4" });
+  };
+
   const atualizaEtapa = (id: number) => {
     setEtapas((prev) =>
       prev.map((e) => ({
@@ -57,20 +104,28 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
   // 4. Função que envia o vídeo para o nosso "Cérebro" (a API que criamos)
   const enviarParaAnalise = async () => {
     if (!file) return;
+
     setLoading(true);
     setErro(false);
     setEtapas(etapasIniciais);
+
     try {
       // ETAPA 1: Upload para o Supabase Storage (Evita o erro da Vercel)
       atualizaEtapa(1);
-      // await new Promise((r) => setTimeout(r, 800));
-      const fileExt = file.name.split(".").pop();
+
+      // 🔥 NOVO: COMPRESSÃO
+      const videoComprimido = await comprimirVideo(file);
+
+      // const fileExt = file.name.split(".").pop();
+      // const fileName = `${Math.random()}.${fileExt}`;
+      // const filePath = `${fileName}`;
+      const fileExt = "mp4";
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("videos-virais")
-        .upload(filePath, file);
+        .upload(filePath, videoComprimido);
 
       if (uploadError) throw uploadError;
 
