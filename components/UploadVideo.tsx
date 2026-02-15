@@ -20,6 +20,7 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
   const [file, setFile] = useState<File | null>(null); // Guarda o vídeo escolhido
   const [loading, setLoading] = useState(false); // Sabe se a IA está pensando
   const [etapas, setEtapas] = useState(etapasIniciais);
+  const [erro, setErro] = useState(false);
 
   // 2. Função quando o usuário arrasta o vídeo sobre a área
   const handleDrag = (e: React.DragEvent) => {
@@ -56,6 +57,7 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
   const enviarParaAnalise = async () => {
     if (!file) return;
     setLoading(true);
+    setErro(false);
 
     //etapa1
     atualizaEtapa(1);
@@ -85,10 +87,33 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
       console.log(data.resultado);
     } catch (error) {
       alert(`Erro: ${error} ao analisar vídeo.`);
+      setErro(true);
     } finally {
       setLoading(false);
     }
   };
+
+  // TELA DE ERRO
+  if (erro) {
+    return (
+      <div className="flex flex-col items-center justify-center p-10 bg-red-50 rounded-3xl border-2 border-red-200 animate-in fade-in zoom-in duration-300">
+        <div className="text-5xl mb-4">⚠️</div>
+        <h2 className="text-xl font-bold text-red-800">
+          Ocorreu um erro na IA
+        </h2>
+        <p className="text-red-600 text-center mt-2 mb-6">
+          O Viral Neuro-Architect está instável ou o vídeo não pôde ser
+          processado.
+        </p>
+        <button
+          onClick={enviarParaAnalise}
+          className="px-8 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200"
+        >
+          🔄 Tentar Outra Vez
+        </button>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
