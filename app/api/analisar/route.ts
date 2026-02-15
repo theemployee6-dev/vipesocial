@@ -2,35 +2,39 @@ import { NextResponse } from "next/server";
 import { supabase } from "../../../lib/supabase";
 import { geminiModel, PROMPT_VIPESOCIAL } from "../../../lib/gemini";
 
+// Configurações cruciais para a Vercel
+export const maxDuration = 60;
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
-    // 1. Log para saber que a requisição chegou
-    console.log("Recebendo requisição...");
+    console.log("Recebendo requisição via URL...");
 
-    const formData = await request.formData();
-    const videoFile = formData.get("video") as File;
-    const userId = formData.get("userId") as string;
+    // 1. Agora lemos JSON em vez de FormData
+    const { videoUrl, userId } = await request.json();
 
-    if (!videoFile) {
+    if (!videoUrl) {
       return NextResponse.json(
-        { error: "Vídeo não encontrado no envio." },
+        { error: "URL do vídeo não encontrada." },
         { status: 400 },
       );
     }
 
-    // 2. Transformar o vídeo para a IA
-    console.log("Transformando vídeo...");
-    const bytes = await videoFile.arrayBuffer();
-    const videoBase64 = Buffer.from(bytes).toString("base64");
+    // 2. Baixar o vídeo do Supabase para enviar ao Gemini
+    // Precisamos converter para Buffer para a IA conseguir processar
+    console.log("Baixando vídeo do Storage para processamento...");
+    const responseVideo = await fetch(videoUrl);
+    const arrayBuffer = await responseVideo.arrayBuffer();
+    const videoBase64 = Buffer.from(arrayBuffer).toString("base64");
 
     // 3. Chamar o Gemini
-    console.log("Chamando o Gemini (isso pode demorar uns 10-20 segundos)...");
+    console.log("Chamando o Gemini (Neuro-Architect em ação)...");
     const resultadoIA = await geminiModel.generateContent([
       PROMPT_VIPESOCIAL,
       {
         inlineData: {
           data: videoBase64,
-          mimeType: videoFile.type,
+          mimeType: "video/mp4", // Como vem do seu bucket, geralmente é mp4
         },
       },
     ]);
@@ -38,24 +42,27 @@ export async function POST(request: Request) {
     const parecerTexto = resultadoIA.response.text();
     console.log("IA respondeu com sucesso!");
 
-    // 4. Salvar no Supabase (Opcional por enquanto para teste)
-    // Se o banco falhar, o código continua para você ver o resultado
+    // 4. Salvar no Supabase
     try {
       await supabase.from("analises").insert([
         {
-          perfil_id: userId || null, // Se não tiver user agora, não trava
-          video_url: "video_local",
+          perfil_id: userId || null,
+          video_url: videoUrl, // Agora salvamos a URL real do Storage!
           parecer_tecnico: parecerTexto,
         },
       ]);
+      console.log("Dados salvos no banco!");
     } catch (dbError) {
-      console.error("Erro ao salvar no banco, mas a IA funcionou:", dbError);
+      console.error("Erro ao salvar no banco:", dbError);
     }
 
     return NextResponse.json({ resultado: parecerTexto });
-  } catch (error) {
-    // Aqui pegamos o erro real e mostramos no console do VS Code
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     console.error("ERRO DETALHADO:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Erro interno" },
+      { status: 500 },
+    );
   }
 }

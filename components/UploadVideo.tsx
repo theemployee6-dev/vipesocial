@@ -1,6 +1,7 @@
 "use client"; // Dizemos ao Next.js que este botão tem "vida" (cliques e movimentos)
 
 import React, { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface UploadVideoProps {
   aoFinalizar: (texto: string) => void;
@@ -58,24 +59,40 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
     if (!file) return;
     setLoading(true);
     setErro(false);
-
-    //etapa1
-    atualizaEtapa(1);
-    await new Promise((r) => setTimeout(r, 800));
-
-    //etapa2
-    atualizaEtapa(2);
-    const formData = new FormData();
-    formData.append("video", file);
-
-    atualizaEtapa(3);
+    setEtapas(etapasIniciais);
     try {
+      // ETAPA 1: Upload para o Supabase Storage (Evita o erro da Vercel)
+      atualizaEtapa(1);
+      // await new Promise((r) => setTimeout(r, 800));
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("videos-virais")
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      // ETAPA 2: Obter a URL pública do vídeo
+      atualizaEtapa(2);
+      // const formData = new FormData();
+      // formData.append("video", file);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("videos-virais").getPublicUrl(filePath);
+
+      // ETAPA 3: Enviar apenas o LINK para a API (Payload leve)
+      atualizaEtapa(3);
       const response = await fetch("/api/analisar", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ videoUrl: publicUrl }),
       });
-      atualizaEtapa(4);
 
+      if (!response.ok) throw new Error("Falha na resposta da IA");
+
+      atualizaEtapa(4);
       const data = await response.json();
 
       if (data.resultado) {
