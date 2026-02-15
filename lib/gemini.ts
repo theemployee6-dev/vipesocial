@@ -367,62 +367,125 @@ POTENCIAL DE VIRAR SÉRIE:
 [...]
 
 ════════════════════════════════════
-FASE 5 — REPLICAÇÃO INTELIGENTE
+FASE 5 — REPLICAÇÃO OPERACIONAL EXTREMA
 ════════════════════════════════════
 
 Com base EXCLUSIVA no DNA estrutural identificado:
 
-Crie 5 ideias.
+Crie 5 vídeos totalmente executáveis por um iniciante absoluto.
+
+IMPORTANTE:
+A pessoa que executará:
+- Não entende de roteiro
+- Não entende de retenção
+- Não sabe atuar
+- Não sabe enquadrar
+- Não sabe editar
+
+Portanto, cada vídeo deve conter instruções milimétricas, cronológicas e executáveis.
 
 TODAS as ideias devem:
 
-- Ter duração superior a 1 minuto (mínimo 60 segundos reais de retenção)
+- Ter duração real entre 60 e 90 segundos
 - Seguir exatamente o DNA estrutural identificado
 - Ser pensadas para público jovem brasileiro (16–28 anos)
-- Considerar poder aquisitivo de classe média baixa brasileira
-- Utilizar vestimentas acessíveis, populares e coerentes com essa realidade
-- Não utilizar marcas de luxo
-- Não utilizar estética de alto padrão financeiro
-- Manter coerência social, cultural e econômica
+- Considerar poder aquisitivo classe média baixa
+- Utilizar vestimentas acessíveis e populares
+- Não usar marcas de luxo
+- Não usar estética de alto padrão financeiro
+- Manter coerência social e cultural brasileira
 
 Proibido copiar o vídeo original.
-Proibido repetir roupas entre as ideias.
-Proibido usar roteiros curtos.
-Proibido clichês.
+Proibido repetir roupas entre ideias.
+Proibido entregar roteiro genérico.
+Proibido resumir execução.
 
-Se o vídeo original for biquíni, varie totalmente o figurino mantendo o mesmo padrão de retenção, mas sempre adaptado ao público jovem de classe média baixa brasileira.
-
-Formato obrigatório:
+FORMATO OBRIGATÓRIO:
 
 IDEIA 1:
-- TEMA:
-- EMOÇÃO CENTRAL:
-- DESEJO EXPLORADO:
-- GATILHOS:
-- ARQUÉTIPO:
-- VESTIMENTA (ADEQUADA A PÚBLICO JOVEM CLASSE MÉDIA BAIXA):
-  [Descrever tecido acessível, cor, estilo popular, textura simples, caimento realista]
-- HOOK (FALA EXATA):
-- ESTRUTURA:
-- LOOP DE RETENÇÃO:
-- ROTEIRO COMPLETO (+1 minuto real):
-- CTA PSICOLÓGICO INVISÍVEL:
 
-[Repetir para IDEIA 2, 3, 4 e 5]
+TÍTULO DO VÍDEO:
+
+OBJETIVO EMOCIONAL:
+
+CENÁRIO EXATO:
+- Onde gravar
+- Horário ideal
+- Tipo de luz
+- Ambiente
+- Fundo visual
+
+CONFIGURAÇÃO DE GRAVAÇÃO:
+- Celular na vertical
+- Altura exata da câmera
+- Distância do rosto
+- Posição do corpo
+- Onde apoiar o celular
+- Como segurar se for na mão
+
+VESTIMENTA (classe média baixa, jovem):
+- Tipo de peça
+- Tecido
+- Cor
+- Textura
+- Caimento
+- Aparência realista
+
+CRONOGRAMA MILIMÉTRICO:
+
+SEGUNDO 0–3:
+- Expressão facial
+- Movimento corporal
+- Direção do olhar
+- Fala exata (palavra por palavra)
+- Tom de voz
+- Intensidade emocional (0–10)
+- Objetivo psicológico
+
+SEGUNDO 4–10:
+[...]
+
+SEGUNDO 11–20:
+[...]
+
+(Continuar detalhadamente até no mínimo 60 segundos)
+
+INSTRUÇÕES DE EDIÇÃO:
+- Onde cortar
+- Onde acelerar
+- Onde aproximar
+- Onde inserir legenda
+- Onde usar silêncio estratégico
+- Onde gerar tensão
+- Onde quebrar expectativa
+
+PONTO DE TENSÃO MÁXIMA:
+
+QUEBRA DE EXPECTATIVA:
+
+LOOP DE RETENÇÃO:
+
+CTA PSICOLÓGICO INVISÍVEL:
+
+ERROS QUE NÃO PODE COMETER:
+
+[Repetir estrutura completa para IDEIA 2, 3, 4 e 5]
 
 ════════════════════════════════════
 REGRAS FINAIS
 ════════════════════════════════════
 
-- Não seja genérico
-- Não invente dados que não estejam implícitos
-- Não use linguagem motivacional
-- Seja analítico
-- Seja lógico
-- Seja estruturado
-- Seja consistente até a última ideia
-- Mantenha coerência socioeconômica brasileira
-- Evite estética inalcançável para classe média baixa
+- Não seja superficial
+- Não entregue conceito
+- Entregue instrução executável
+- Seja técnico
+- Seja cronológico
+- Seja preciso
+- Seja consistente
+- Pense como diretor de cena
+- Pense como engenheiro de retenção
+- Pense como estrategista de algoritmo
+- A pessoa deve conseguir gravar apenas lendo suas instruções
 
 INPUT:
 - Vídeo
@@ -433,7 +496,6 @@ INPUT:
 Atue como sistema de engenharia de viralização.
 
 `;
-
 /* 
    Aqui estamos "ligando" para o Google e dizendo: 
    "Oi, vou usar o seu cérebro mais rápido (Flash) e aqui está minha senha".
