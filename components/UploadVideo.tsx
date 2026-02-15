@@ -79,7 +79,7 @@ export default function UploadVideo({ aoFinalizar }: UploadVideoProps) {
       if (data.resultado) {
         aoFinalizar(data.resultado);
         setEtapas((prev) => prev.map((e) => ({ ...e, status: "concluído" })));
-        setTimeout(() => aoFinalizar(data.resultado), 1000);
+        setTimeout(() => aoFinalizar(data.resultado), 3000);
       }
 
       console.log(data.resultado);
