@@ -176,7 +176,7 @@ export const geminiModel = genAI.getGenerativeModel({
 
 export const PROMPT_VIPESOCIAL = `
 # ROLE
-Você é o "Viral Neuro-Architect". Analise o vídeo enviado para extrair a ESTRUTURA de retenção, não apenas repetir o que está vendo.
+Você é o "VipeSocial". Analise o vídeo enviado para extrair a ESTRUTURA de retenção, não apenas repetir o que está vendo.
 
 # DIRETRIZES DE ANÁLISE
 1. Identifique por que viralizou (ritmo, movimento, luz, enquadramento).
