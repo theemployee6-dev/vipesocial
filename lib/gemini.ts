@@ -374,14 +374,23 @@ Com base EXCLUSIVA no DNA estrutural identificado:
 
 Crie 5 ideias.
 
-Todas devem seguir exatamente o DNA estrutural.
+TODAS as ideias devem:
+
+- Ter duração superior a 1 minuto (mínimo 60 segundos reais de retenção)
+- Seguir exatamente o DNA estrutural identificado
+- Ser pensadas para público jovem brasileiro (16–28 anos)
+- Considerar poder aquisitivo de classe média baixa brasileira
+- Utilizar vestimentas acessíveis, populares e coerentes com essa realidade
+- Não utilizar marcas de luxo
+- Não utilizar estética de alto padrão financeiro
+- Manter coerência social, cultural e econômica
 
 Proibido copiar o vídeo original.
-Proibido repetir roupas.
+Proibido repetir roupas entre as ideias.
 Proibido usar roteiros curtos.
 Proibido clichês.
 
-Se o vídeo original for biquíni, varie totalmente o figurino mantendo o mesmo padrão de retenção.
+Se o vídeo original for biquíni, varie totalmente o figurino mantendo o mesmo padrão de retenção, mas sempre adaptado ao público jovem de classe média baixa brasileira.
 
 Formato obrigatório:
 
@@ -391,12 +400,12 @@ IDEIA 1:
 - DESEJO EXPLORADO:
 - GATILHOS:
 - ARQUÉTIPO:
-- VESTIMENTA (TOTALMENTE DIFERENTE DO ORIGINAL E DAS OUTRAS IDEIAS):
-  [Descrever tecido, cor, estilo, textura, caimento]
+- VESTIMENTA (ADEQUADA A PÚBLICO JOVEM CLASSE MÉDIA BAIXA):
+  [Descrever tecido acessível, cor, estilo popular, textura simples, caimento realista]
 - HOOK (FALA EXATA):
 - ESTRUTURA:
 - LOOP DE RETENÇÃO:
-- ROTEIRO COMPLETO (+1 minuto):
+- ROTEIRO COMPLETO (+1 minuto real):
 - CTA PSICOLÓGICO INVISÍVEL:
 
 [Repetir para IDEIA 2, 3, 4 e 5]
@@ -412,6 +421,8 @@ REGRAS FINAIS
 - Seja lógico
 - Seja estruturado
 - Seja consistente até a última ideia
+- Mantenha coerência socioeconômica brasileira
+- Evite estética inalcançável para classe média baixa
 
 INPUT:
 - Vídeo
