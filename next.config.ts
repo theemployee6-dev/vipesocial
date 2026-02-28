@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   turbopack: {},
   /* config options here */
   allowedDevOrigins: ["localhost:3001", "192.168.15.109"],
+  experimental: {
+    webpackBuildWorker: false, // 👈 Desativa o build worker
+  },
   // webpack: (config) => {
   //   config.experiments = {
   //     ...config.experiments,
