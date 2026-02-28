@@ -204,7 +204,7 @@ export default function Home() {
                 style={{ color: "rgba(200,180,255,0.65)" }}
               >
                 Faça upload de um vídeo viral e receba a engenharia reversa
-                completa + 15 ideias baseadas no mesmo padrão.
+                completa + 5 ideias baseadas no mesmo padrão.
               </p>
             </div>
           )}

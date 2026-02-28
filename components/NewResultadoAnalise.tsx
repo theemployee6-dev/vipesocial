@@ -336,7 +336,7 @@ export default function ResultadoAnalise({
             }}
           >
             <p className="text-xs font-bold text-white/70 mb-2">
-              DNA Emocional
+              DNA Emocional - Porque o vídeo viralizou?
             </p>
             <p className="text-xs text-white/50 leading-relaxed mb-1">
               <span className="text-white/30">Dominante: </span>
