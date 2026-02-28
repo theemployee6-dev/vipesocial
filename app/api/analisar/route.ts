@@ -6,7 +6,7 @@ import { VipeFullOutputSchema } from "@/types/vipe.types";
 import type { VideoMetricas, PerfilCriador } from "@/types/vipe.types";
 
 // Quando for para produção na Vercel Pro, aumentar para 300
-export const maxDuration = 60;
+export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
@@ -46,7 +46,10 @@ export async function POST(request: Request) {
     console.log("📥 [INPUT] URL:", videoUrl.substring(0, 60) + "...");
     console.log("📥 [INPUT] Métricas:", metricas);
     console.log("📥 [INPUT] Perfil:", perfilCriador);
-    console.log("📥 [INPUT] Nicho confirmado:", nichoConfirmado ?? "não informado");
+    console.log(
+      "📥 [INPUT] Nicho confirmado:",
+      nichoConfirmado ?? "não informado",
+    );
     console.log("👤 [USER] ID:", userId || "anônimo");
 
     // ── PIPELINE VIPE ─────────────────────────────────────
@@ -75,15 +78,24 @@ export async function POST(request: Request) {
         .join("\n");
       console.error("❌ [ZOD] Output inválido:\n" + issues);
       return NextResponse.json(
-        { error: "A IA retornou uma estrutura inválida. Tente novamente.", detalhe: issues },
+        {
+          error: "A IA retornou uma estrutura inválida. Tente novamente.",
+          detalhe: issues,
+        },
         { status: 500 },
       );
     }
 
     console.log("✅ [ZOD] Output validado com sucesso");
     console.log("📊 [VIPE] Nicho confirmado:", validacao.data.nicho_confirmado);
-    console.log("📊 [VIPE] Emoção central:", validacao.data.prompt2.emocao_central.nome);
-    console.log("📊 [VIPE] Roteiros gerados:", validacao.data.prompt4.roteiros.length);
+    console.log(
+      "📊 [VIPE] Emoção central:",
+      validacao.data.prompt2.emocao_central.nome,
+    );
+    console.log(
+      "📊 [VIPE] Roteiros gerados:",
+      validacao.data.prompt4.roteiros.length,
+    );
 
     // ── SALVAR NO SUPABASE (background) ──────────────────
     console.log("-".repeat(50));
@@ -103,7 +115,10 @@ export async function POST(request: Request) {
       ]);
       console.log("✅ [BANCO] Inserção iniciada em background");
     } catch (dbError: any) {
-      console.error("⚠️ [BANCO] Erro ao salvar (não crítico):", dbError.message);
+      console.error(
+        "⚠️ [BANCO] Erro ao salvar (não crítico):",
+        dbError.message,
+      );
     }
 
     // ── RESPOSTA FINAL ────────────────────────────────────
