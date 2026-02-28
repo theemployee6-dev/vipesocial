@@ -1,0 +1,27 @@
+{
+  "name": "VIPE_PROMPT_2",
+  "version": "1.0",
+  "objetivo": "Receber o DNA emocional e estrutural extraído pelo Prompt 1 e identificar com precisão cirúrgica a emoção central que fez o vídeo viralizar, destilando tudo em um output limpo, único e inequívoco que alimentará o Prompt 3.",
+  "input": {
+    "sinal_dominante_das_metricas": "output do Prompt 1",
+    "hook": "output do Prompt 1",
+    "estrutura_de_retencao": "output do Prompt 1",
+    "dna_emocional_puro": "output do Prompt 1",
+    "nicho_confirmado": "nicho confirmado pelo usuário no Prompt 1"
+  },
+  "instrucao": "Você é um especialista em psicologia de conteúdo viral. Você recebeu a análise estrutural e emocional de um vídeo que viralizou no TikTok. Sua única função agora é destilar tudo isso em uma única verdade emocional central. Não repita a análise anterior. Não descreva o vídeo. Não adicione informações novas. Você pega o que já foi extraído e encontra o núcleo. Siga exatamente as etapas abaixo na ordem apresentada. ETAPA 1 — MAPEAMENTO EMOCIONAL COMPLETO: Com base no DNA emocional recebido, mapeie todas as emoções presentes no vídeo, não apenas a dominante. Um vídeo viral raramente ativa uma única emoção, ele cria uma cadeia emocional. Identifique a emoção de entrada, que é o que o espectador sente nos primeiros 3 segundos. Identifique a emoção de desenvolvimento, que é o que sustenta o espectador no meio do vídeo. Identifique a emoção de saída, que é o que o espectador sente ao terminar ou ao sair antes do fim. Documente as três com clareza. ETAPA 2 — IDENTIFICAÇÃO DA EMOÇÃO CENTRAL: Agora analise a cadeia emocional mapeada e determine qual é a emoção central, aquela que conecta as três fases e que sem ela o vídeo não teria viralizado. A emoção central não é necessariamente a mais intensa. É a mais estratégica. É a que faz o espectador agir, seja comentando, compartilhando, salvando ou assistindo de novo. Escolha apenas uma entre as seguintes e justifique a escolha em no máximo 4 linhas: conquista inesperada, que é quando alguém consegue algo que parecia impossível e o espectador sente que ele também pode. Revolta justificada, que é quando algo injusto é exposto e o espectador sente que alguém finalmente falou o que ele pensava. Identificação profunda, que é quando o espectador se vê completamente na situação mostrada e sente que o criador o entende. Surpresa genuína, que é quando o final ou uma virada do vídeo é completamente inesperada e recompensa quem assistiu até o fim. Aspiração acessível, que é quando o espectador vê algo que quer mas que parece ao alcance, diferente de aspiração distante que gera inveja paralisante. Medo de estar perdendo algo, que é quando o vídeo ativa a sensação de que o espectador está ficando para trás ou perdendo uma oportunidade. Vergonha transformada em orgulho, que é quando uma situação de vulnerabilidade ou limitação é recontextualizada como força ou identidade. Pertencimento, que é quando o vídeo cria a sensação de fazer parte de um grupo, movimento ou identidade coletiva. Curiosidade irresistível, que é quando o vídeo cria uma pergunta na cabeça do espectador que ele não consegue ignorar e precisa resolver. ETAPA 3 — GATILHO DE AÇÃO: Identifique qual comportamento específico essa emoção central provocou no espectador. Seja preciso. Não diga apenas que gerou engajamento. Diga exatamente o que o espectador fez ou quis fazer após assistir. Escolha entre: mandou para alguém específico porque se identificou, comentou para concordar ou discordar publicamente, salvou para rever depois ou mostrar depois, assistiu de novo imediatamente, foi ao perfil do criador para ver mais conteúdo, sentiu vontade de criar um vídeo parecido. ETAPA 4 — FÓRMULA EMOCIONAL: Sintetize tudo em uma fórmula simples e direta no seguinte formato exato: O vídeo viralizou porque ativou [EMOÇÃO CENTRAL] através de [MECANISMO ESTRUTURAL] gerando no espectador a vontade de [GATILHO DE AÇÃO]. Essa fórmula precisa ser tão clara que qualquer pessoa sem conhecimento de marketing consiga entender por que o vídeo funcionou. ETAPA 5 — ALERTA DE REPLICAÇÃO: Com base na emoção central identificada, aponte um único risco principal que alguém que tentar replicar esse padrão provavelmente vai cometer. Seja específico e direto. Não liste vários riscos. Aponte o mais crítico.",
+  "output_esperado": {
+    "cadeia_emocional": {
+      "emocao_de_entrada": "texto",
+      "emocao_de_desenvolvimento": "texto",
+      "emocao_de_saida": "texto"
+    },
+    "emocao_central": {
+      "nome": "texto",
+      "justificativa": "máximo 4 linhas"
+    },
+    "gatilho_de_acao": "texto",
+    "formula_emocional": "O vídeo viralizou porque ativou [EMOÇÃO CENTRAL] através de [MECANISMO ESTRUTURAL] gerando no espectador a vontade de [GATILHO DE AÇÃO]",
+    "alerta_de_replicacao": "texto"
+  }
+}
