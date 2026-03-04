@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --breakpoint-4k: 2560px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +24,73 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .tabs-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-track {
+    background: #161625;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #6d28d9, #a855f7);
+    border-radius: 10px;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #7c3aed, #c084fc);
+  }
+
+  .tabs-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #6d28d9 #161625;
+  }
+} */
+
+@import "tailwindcss";
+
+:root {
+  --background: #0d0d1a; /* Fundo escuro fixo */
+  --foreground: #ededed; /* Texto claro fixo */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --breakpoint-4k: 2560px; /* Breakpoint para TV 4K */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .tabs-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-track {
+    background: #161625;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #6d28d9, #a855f7);
+    border-radius: 10px;
+  }
+
+  .tabs-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #7c3aed, #c084fc);
+  }
+
+  .tabs-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #6d28d9 #161625;
+  }
 }

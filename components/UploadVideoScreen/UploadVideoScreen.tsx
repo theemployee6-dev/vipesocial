@@ -1,158 +1,45 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
-import React, { useState } from "react";
-import {
-  validarArquivo,
-  formatarTamanhoArquivo,
-  uploadVideoParaSupabase,
-  enviarParaApiAnalise,
-} from "@/lib/uploadVideo";
-import type {
-  VideoMetricas,
-  PerfilCriador,
-  VipeFullOutput,
-} from "@/types/vipe.types";
+import React from "react";
+import { useUploadVideo } from "./hooks/useUploadVideo";
+import { formatarTamanhoArquivo } from "@/lib/uploadVideo";
+import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
 
 interface UploadVideoScreenProps {
   aoFinalizar: (resultado: VipeFullOutput) => void;
 }
 
-type Etapa = "upload" | "metricas" | "perfil" | "processando";
-
-const etapasProcessamento = [
-  { id: 1, label: "Recebendo vídeo", status: "esperando" },
-  { id: 2, label: "Enviando para análise", status: "esperando" },
-  { id: 3, label: "Chamando Viral Neuro-Architect", status: "esperando" },
-  { id: 4, label: "Processando DNA Viral", status: "esperando" },
-];
-
-const metricasIniciais: VideoMetricas = {
-  views: 0,
-  likes: 0,
-  comentarios: 0,
-  shares: 0,
-  replay_rate: undefined,
-};
-
-const perfilIniciais: PerfilCriador = {
-  realidade_socioeconomica: "classe média",
-  idade: 0,
-  cidade: "",
-};
-
 export default function UploadVideoScreen({
   aoFinalizar,
 }: UploadVideoScreenProps) {
-  const [etapaAtual, setEtapaAtual] = useState<Etapa>("upload");
-
-  // Upload
-  const [dragActive, setDragActive] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [mensagemErroArquivo, setMensagemErroArquivo] = useState("");
-
-  // Dados da análise
-  const [metricas, setMetricas] = useState<VideoMetricas>(metricasIniciais);
-  const [perfilCriador, setPerfilCriador] =
-    useState<PerfilCriador>(perfilIniciais);
-  const [nichoConfirmado, setNichoConfirmado] = useState("");
-
-  // Processamento
-  const [etapasProc, setEtapasProc] = useState(etapasProcessamento);
-  const [erro, setErro] = useState(false);
-  const [mensagemErro, setMensagemErro] = useState("");
-
-  // ─── Helpers ─────────────────────────────────────────
-
-  const atualizaEtapaProc = (id: number) => {
-    setEtapasProc((prev) =>
-      prev.map((e) => ({
-        ...e,
-        status:
-          e.id < id ? "concluido" : e.id === id ? "carregando" : "esperando",
-      })),
-    );
-  };
-
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
-    else if (e.type === "dragleave") setDragActive(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files?.[0]) selecionarArquivo(e.dataTransfer.files[0]);
-  };
-
-  const selecionarArquivo = (arquivo: File) => {
-    setMensagemErroArquivo("");
-    const erro = validarArquivo(arquivo);
-    if (erro) {
-      setMensagemErroArquivo(erro);
-      return;
-    }
-    setFile(arquivo);
-  };
-
-  const validarMetricas = (): string | null => {
-    if (metricas.views <= 0) return "Informe o número de views.";
-    if (metricas.likes < 0) return "Likes não pode ser negativo.";
-    if (metricas.comentarios < 0) return "Comentários não pode ser negativo.";
-    if (metricas.shares < 0) return "Shares não pode ser negativo.";
-    return null;
-  };
-
-  const validarPerfil = (): string | null => {
-    if (!perfilCriador.cidade.trim()) return "Informe sua cidade.";
-    if (perfilCriador.idade <= 0 || perfilCriador.idade > 120)
-      return "Informe uma idade válida.";
-    return null;
-  };
-
-  // ─── Envio final ─────────────────────────────────────
-
-  const enviarParaAnalise = async () => {
-    if (!file) return;
-
-    setErro(false);
-    setMensagemErro("");
-    setEtapasProc(etapasProcessamento);
-    setEtapaAtual("processando");
-
-    try {
-      atualizaEtapaProc(1);
-      const { publicUrl } = await uploadVideoParaSupabase(file);
-
-      atualizaEtapaProc(2);
-      const data: any = await enviarParaApiAnalise(publicUrl, {
-        metricas,
-        perfilCriador,
-        nichoConfirmado: nichoConfirmado.trim() || undefined,
-      });
-
-      atualizaEtapaProc(3);
-      atualizaEtapaProc(4);
-
-      if (data.resultado) {
-        setEtapasProc((prev) =>
-          prev.map((e) => ({ ...e, status: "concluido" })),
-        );
-        setTimeout(() => aoFinalizar(data.resultado as VipeFullOutput), 1000);
-      }
-    } catch (error: any) {
-      console.error("❌ [ERRO]", error.message);
-      setMensagemErro(error.message || "Erro ao analisar vídeo");
-      setErro(true);
-      setEtapaAtual("upload");
-    }
-  };
+  const {
+    etapaAtual,
+    setEtapaAtual,
+    dragActive,
+    file,
+    mensagemErroArquivo,
+    metricas,
+    setMetricas,
+    perfilCriador,
+    setPerfilCriador,
+    nichoConfirmado,
+    setNichoConfirmado,
+    etapasProc,
+    erro,
+    mensagemErro,
+    handleDrag,
+    handleDrop,
+    selecionarArquivo,
+    validarMetricas,
+    validarPerfil,
+    enviarParaAnalise,
+    setFile,
+    setErro,
+  } = useUploadVideo({ aoFinalizar });
 
   // ─── Tela de erro ─────────────────────────────────────
-
   if (erro) {
     return (
       <div className="flex flex-col items-center justify-center p-10 bg-red-50 rounded-3xl border-2 border-red-200 animate-in fade-in zoom-in duration-300">
@@ -179,7 +66,6 @@ export default function UploadVideoScreen({
   }
 
   // ─── Tela de processamento ────────────────────────────
-
   if (etapaAtual === "processando") {
     return (
       <div className="flex flex-col items-center justify-center p-10 space-y-6 bg-white rounded-3xl shadow-xl">
@@ -193,7 +79,11 @@ export default function UploadVideoScreen({
               className="flex items-center justify-between p-3 border-b border-gray-100"
             >
               <span
-                className={`text-sm ${etapa.status === "esperando" ? "text-gray-400" : "text-purple-700"}`}
+                className={`text-sm ${
+                  etapa.status === "esperando"
+                    ? "text-gray-400"
+                    : "text-purple-700"
+                }`}
               >
                 {etapa.label}
               </span>
@@ -214,7 +104,6 @@ export default function UploadVideoScreen({
   }
 
   // ─── Etapa 1: Upload ──────────────────────────────────
-
   if (etapaAtual === "upload") {
     return (
       <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto p-8">
@@ -293,7 +182,6 @@ export default function UploadVideoScreen({
   }
 
   // ─── Etapa 2: Métricas ────────────────────────────────
-
   if (etapaAtual === "metricas") {
     const erroMetricas = validarMetricas();
 
@@ -377,7 +265,6 @@ export default function UploadVideoScreen({
   }
 
   // ─── Etapa 3: Perfil ──────────────────────────────────
-
   if (etapaAtual === "perfil") {
     const erroPerfil = validarPerfil();
 

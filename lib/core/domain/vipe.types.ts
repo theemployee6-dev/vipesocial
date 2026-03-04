@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 // ============================================
 // INPUT
 // ============================================
@@ -31,7 +30,13 @@ export const VipeAnalysisInputSchema = z.object({
 
 export const VipeHookSchema = z.object({
   tipo: z.string(),
-  intensidade: z.string(),
+  // intensidade: z.string(),
+  intensidade: z.union([z.string(), z.number()]).transform((val) => {
+    // Se for número, converte para string
+    if (typeof val === "number") return `${val}`;
+    // Se já for string, retorna como está
+    return val;
+  }),
   explicacao: z.string(),
 });
 
@@ -53,7 +58,13 @@ export const VipePrompt1OutputSchema = z.object({
   estrutura_de_retencao: VipeEstruturaRetencaoSchema,
   dna_emocional_puro: VipeDnaEmocionalSchema,
   nicho_inferido: z.string(),
-  confirmacao_necessaria: z.boolean(),
+  // confirmacao_necessaria: z.boolean(),
+  confirmacao_necessaria: z
+    .union([z.boolean(), z.string()])
+    .transform((val) => {
+      if (typeof val === "boolean") return val;
+      return val.toLowerCase() === "true";
+    }),
 });
 
 // ============================================
@@ -84,7 +95,8 @@ export const VipePrompt2OutputSchema = z.object({
 // ============================================
 
 export const VipeConceitoSchema = z.object({
-  numero: z.number(),
+  // numero: z.number(),
+  numero: z.union([z.number(), z.string()]).transform((val) => Number(val)),
   conceito_central: z.string(),
   emocao_ativada: z.string(),
   motivo_de_identificacao: z.string(),
@@ -162,23 +174,29 @@ export const VipeRoteiroCronologicoSchema = z.object({
 });
 
 export const VipeEdicaoSchema = z.object({
-  onde_cortar: z.string(),
-  onde_acelerar: z.string(),
-  onde_inserir_legenda: z.string(),
-  onde_usar_silencio: z.string(),
-  musica_de_fundo: z.string(),
-  onde_fazer_corte_seco: z.string(),
+  onde_cortar: z.string().default("Não especificado"),
+  onde_acelerar: z.string().default("Não especificado"),
+  onde_inserir_legenda: z.string().default("Não especificado"),
+  onde_usar_silencio: z.string().default("Não especificado"),
+  musica_de_fundo: z.string().default("Não especificado"),
+  onde_fazer_corte_seco: z.string().default("Não especificado"),
 });
 
 export const VipeElementosEstrategicosSchema = z.object({
   ponto_de_maior_tensao: z.string(),
   quebra_de_expectativa: z.string(),
-  loop_de_retencao: z.string(),
+  loop_de_retencao: z.string().optional(),
   cta_invisivel: z.string(),
 });
 
 export const VipeRoteiroSchema = z.object({
-  numero: z.number(),
+  // numero: z.number(),
+  numero: z.union([z.number(), z.string()]).transform((val) => {
+    if (typeof val === "string") {
+      return parseInt(val, 10);
+    }
+    return val;
+  }),
   cabecalho: VipeCabecalhoSchema,
   cenario: VipeCenarioSchema,
   setup_de_gravacao: VipeSetupGravacaoSchema,
@@ -189,9 +207,15 @@ export const VipeRoteiroSchema = z.object({
   erros_fatais: z.array(z.string()),
 });
 
-export const VipePrompt4OutputSchema = z.object({
-  roteiros: z.array(VipeRoteiroSchema),
-});
+export const VipePrompt4OutputSchema = z.union([
+  // roteiros: z.array(VipeRoteiroSchema),
+  // Caso 1: Array direto
+  z.array(VipeRoteiroSchema).transform((roteiros) => ({ roteiros })),
+  // Caso 2: Objeto com campo roteiros
+  z.object({
+    roteiros: z.array(VipeRoteiroSchema),
+  }),
+]);
 
 // ============================================
 // OUTPUT FINAL
@@ -209,27 +233,31 @@ export const VipeFullOutputSchema = z.object({
 // TIPOS INFERIDOS (substituem as interfaces manuais)
 // ============================================
 
-export type VideoMetricas       = z.infer<typeof VideoMetricasSchema>;
-export type PerfilCriador       = z.infer<typeof PerfilCriadorSchema>;
-export type VipeAnalysisInput   = z.infer<typeof VipeAnalysisInputSchema>;
-export type VipeHook            = z.infer<typeof VipeHookSchema>;
+export type VideoMetricas = z.infer<typeof VideoMetricasSchema>;
+export type PerfilCriador = z.infer<typeof PerfilCriadorSchema>;
+export type VipeAnalysisInput = z.infer<typeof VipeAnalysisInputSchema>;
+export type VipeHook = z.infer<typeof VipeHookSchema>;
 export type VipeEstruturaRetencao = z.infer<typeof VipeEstruturaRetencaoSchema>;
-export type VipeDnaEmocional    = z.infer<typeof VipeDnaEmocionalSchema>;
-export type VipePrompt1Output   = z.infer<typeof VipePrompt1OutputSchema>;
+export type VipeDnaEmocional = z.infer<typeof VipeDnaEmocionalSchema>;
+export type VipePrompt1Output = z.infer<typeof VipePrompt1OutputSchema>;
 export type VipeCadeiaEmocional = z.infer<typeof VipeCadeiaEmocionalSchema>;
-export type VipeEmocaoCentral   = z.infer<typeof VipeEmocaoCentralSchema>;
-export type VipePrompt2Output   = z.infer<typeof VipePrompt2OutputSchema>;
-export type VipeConceito        = z.infer<typeof VipeConceitoSchema>;
-export type VipePrompt3Output   = z.infer<typeof VipePrompt3OutputSchema>;
+export type VipeEmocaoCentral = z.infer<typeof VipeEmocaoCentralSchema>;
+export type VipePrompt2Output = z.infer<typeof VipePrompt2OutputSchema>;
+export type VipeConceito = z.infer<typeof VipeConceitoSchema>;
+export type VipePrompt3Output = z.infer<typeof VipePrompt3OutputSchema>;
 export type VipeHorarioPostagem = z.infer<typeof VipeHorarioPostagemSchema>;
-export type VipeCabecalho       = z.infer<typeof VipeCabecalhoSchema>;
-export type VipeCenario         = z.infer<typeof VipeCenarioSchema>;
-export type VipeSetupGravacao   = z.infer<typeof VipeSetupGravacaoSchema>;
-export type VipeVestimenta      = z.infer<typeof VipeVestimentaSchema>;
+export type VipeCabecalho = z.infer<typeof VipeCabecalhoSchema>;
+export type VipeCenario = z.infer<typeof VipeCenarioSchema>;
+export type VipeSetupGravacao = z.infer<typeof VipeSetupGravacaoSchema>;
+export type VipeVestimenta = z.infer<typeof VipeVestimentaSchema>;
 export type VipeIntervaloRoteiro = z.infer<typeof VipeIntervaloRoteiroSchema>;
-export type VipeRoteiroCronologico = z.infer<typeof VipeRoteiroCronologicoSchema>;
-export type VipeEdicao          = z.infer<typeof VipeEdicaoSchema>;
-export type VipeElementosEstrategicos = z.infer<typeof VipeElementosEstrategicosSchema>;
-export type VipeRoteiro         = z.infer<typeof VipeRoteiroSchema>;
-export type VipePrompt4Output   = z.infer<typeof VipePrompt4OutputSchema>;
-export type VipeFullOutput      = z.infer<typeof VipeFullOutputSchema>;
+export type VipeRoteiroCronologico = z.infer<
+  typeof VipeRoteiroCronologicoSchema
+>;
+export type VipeEdicao = z.infer<typeof VipeEdicaoSchema>;
+export type VipeElementosEstrategicos = z.infer<
+  typeof VipeElementosEstrategicosSchema
+>;
+export type VipeRoteiro = z.infer<typeof VipeRoteiroSchema>;
+export type VipePrompt4Output = z.infer<typeof VipePrompt4OutputSchema>;
+export type VipeFullOutput = z.infer<typeof VipeFullOutputSchema>;

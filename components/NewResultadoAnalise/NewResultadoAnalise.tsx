@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { VipeFullOutput, VipeRoteiro } from "@/types/vipe.types";
+import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
+import { colors } from "./constants/colors.NewResultadoAnalise"; // ajuste o caminho
+import { useResultadoAnalise } from "./hooks/useResultadoAnalise";
 
 // ─── Props ────────────────────────────────────────────────
 interface ResultadoAnaliseProps {
@@ -9,84 +11,25 @@ interface ResultadoAnaliseProps {
   onVoltar?: () => void;
 }
 
-// ─── Score calculators ────────────────────────────────────
-
-/**
- * Nota técnica (0–100) estimada a partir do hook, retenção e DNA emocional do prompt1.
- *  - hook.intensidade: "alta/alto" = 40pts | "média/medio" = 25pts | resto = 10pts
- *  - confirmacao_necessaria false = +20pts
- *  - dna_emocional.emocao_dominante presente = +15pts
- *  - estrutura_de_retencao.loop_aberto presente = +15pts
- *  - estrutura_de_retencao.quebra_de_previsibilidade presente = +10pts
- */
-function calcNotaTecnica(output: VipeFullOutput): number {
-  const p1 = output.prompt1;
-  let score = 0;
-  const intensidade = p1.hook.intensidade?.toLowerCase() ?? "";
-  if (intensidade.includes("alta") || intensidade.includes("alto")) score += 40;
-  else if (
-    intensidade.includes("média") ||
-    intensidade.includes("media") ||
-    intensidade.includes("médio")
-  )
-    score += 25;
-  else score += 10;
-  if (!p1.confirmacao_necessaria) score += 20;
-  if (p1.dna_emocional_puro?.emocao_dominante) score += 15;
-  if (p1.estrutura_de_retencao?.loop_aberto) score += 15;
-  if (p1.estrutura_de_retencao?.quebra_de_previsibilidade) score += 10;
-  return Math.min(score, 100);
-}
-
-/**
- * Probabilidade viral (0–100) estimada a partir do prompt2.
- *  - formula_emocional presente = +30pts
- *  - gatilho_de_acao presente = +25pts
- *  - cadeia_emocional completa = +25pts
- *  - alerta_de_replicacao ausente/vazio = +20pts
- */
-function calcProbabilidadeViral(output: VipeFullOutput): number {
-  const p2 = output.prompt2;
-  let score = 0;
-  if (p2.formula_emocional) score += 30;
-  if (p2.gatilho_de_acao) score += 25;
-  const c = p2.cadeia_emocional;
-  if (
-    c?.emocao_de_entrada &&
-    c?.emocao_de_desenvolvimento &&
-    c?.emocao_de_saida
-  )
-    score += 25;
-  if (!p2.alerta_de_replicacao || p2.alerta_de_replicacao.trim() === "")
-    score += 20;
-  return Math.min(score, 100);
-}
-
 // ─── Intensity Bar ────────────────────────────────────────
 function IntensityBar({ value }: { value: number }) {
   const total = 10;
-  const colors = [
-    "#7c3aed",
-    "#9333ea",
-    "#a855f7",
-    "#c084fc",
-    "#f59e0b",
-    "#ef4444",
-  ];
   return (
     <div className="flex gap-0.5 items-center flex-1">
       {Array.from({ length: total }).map((_, i) => {
         const filled = i < value;
         const colorIdx = Math.min(
-          Math.floor((i / total) * colors.length),
-          colors.length - 1,
+          Math.floor((i / total) * colors.intensityBar.length),
+          colors.intensityBar.length - 1,
         );
         return (
           <div
             key={i}
             className="h-2 flex-1 rounded-sm transition-all"
             style={{
-              background: filled ? colors[colorIdx] : "rgba(255,255,255,0.08)",
+              background: filled
+                ? colors.intensityBar[colorIdx]
+                : colors.background.unfilledBar,
             }}
           />
         );
@@ -108,7 +51,7 @@ function CircularScore({ score }: { score: number }) {
           cy="64"
           r={r}
           fill="none"
-          stroke="#1e1e30"
+          stroke={colors.background.circleTrack}
           strokeWidth="8"
         />
         <circle
@@ -124,8 +67,8 @@ function CircularScore({ score }: { score: number }) {
         />
         <defs>
           <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#6d28d9" />
-            <stop offset="100%" stopColor="#a855f7" />
+            <stop offset="0%" stopColor={colors.primary[700]} />
+            <stop offset="100%" stopColor={colors.primary[500]} />
           </linearGradient>
         </defs>
       </svg>
@@ -155,15 +98,19 @@ function Accordion({
   return (
     <div
       className="rounded-xl overflow-hidden"
-      style={{ border: "1px solid rgba(255,255,255,0.07)" }}
+      style={{ border: `1px solid ${colors.border.default}` }}
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-4 py-3.5 transition-colors"
-        style={{ background: open ? "#1a1a30" : "#161625" }}
+        style={{
+          background: open
+            ? colors.background.accordionOpen
+            : colors.background.accordionClosed,
+        }}
       >
         <div className="flex items-center gap-2.5">
-          <span style={{ color: "#7c3aed" }}>{open ? "∨" : "›"}</span>
+          <span style={{ color: colors.primary[600] }}>{open ? "∨" : "›"}</span>
           <span className="text-sm font-semibold text-white/85">
             {icon} {title}
           </span>
@@ -174,8 +121,8 @@ function Accordion({
         <div
           className="p-4 border-t"
           style={{
-            background: "#12121e",
-            borderColor: "rgba(255,255,255,0.05)",
+            background: colors.background.accordionContent,
+            borderColor: colors.border.lighter,
           }}
         >
           {children}
@@ -186,7 +133,13 @@ function Accordion({
 }
 
 // ─── Info Row ─────────────────────────────────────────────
-function InfoRow({ label, value }: { label: string; value: string }) {
+function InfoRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | undefined;
+}) {
   return (
     <div>
       <p className="text-white/40 text-xs mb-1">{label}</p>
@@ -200,64 +153,44 @@ export default function ResultadoAnalise({
   resultado,
   onVoltar,
 }: ResultadoAnaliseProps) {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const roteiros = resultado.prompt4.roteiros;
-  const roteiro: VipeRoteiro = roteiros[activeTab];
-  const p1 = resultado.prompt1;
-  const p2 = resultado.prompt2;
-
-  const notaTecnica = calcNotaTecnica(resultado);
-  const probViral = calcProbabilidadeViral(resultado);
-
-  type SegKey = keyof VipeRoteiro["roteiro_cronologico"];
-  const segmentos: { key: SegKey; label: string }[] = [
-    { key: "0_a_3s", label: "0-3s" },
-    { key: "4_a_15s", label: "4-15s" },
-    { key: "16_a_35s", label: "16-35s" },
-    { key: "36_a_55s", label: "36-55s" },
-    { key: "56_a_75s", label: "56-75s" },
-  ];
-
-  // Normaliza intensidade_emocional para número 1–10
-  const parseIntensidade = (val: unknown): number => {
-    const n = parseFloat(String(val));
-    if (!isNaN(n)) return Math.min(Math.max(Math.round(n), 1), 10);
-    const map: Record<string, number> = {
-      baixa: 3,
-      baixo: 3,
-      média: 6,
-      medio: 6,
-      alta: 9,
-      alto: 9,
-      máxima: 10,
-      maximo: 10,
-    };
-    return map[String(val)?.toLowerCase()] ?? 5;
-  };
+  const {
+    activeTab,
+    setActiveTab,
+    roteiros,
+    roteiro,
+    p1,
+    p2,
+    notaTecnica,
+    probViral,
+    segmentos,
+    parseIntensidade,
+  } = useResultadoAnalise(resultado);
 
   return (
     <div
       className="min-h-screen text-white select-none"
       style={{
-        background: "#0d0d1a",
+        background: colors.background.primary,
         fontFamily: "'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif",
       }}
     >
       {/* ── TOPBAR ── */}
       <div
         className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b sticky top-0 z-20"
-        style={{ background: "#0d0d1a", borderColor: "rgba(255,255,255,0.07)" }}
+        style={{
+          background: colors.background.primary,
+          borderColor: colors.border.default,
+        }}
       >
         <div className="flex items-center gap-2.5">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-white text-sm"
-            style={{ background: "linear-gradient(135deg, #6d28d9, #a855f7)" }}
+            style={{ background: colors.gradient.logo }}
           >
             V
           </div>
           <span className="text-base sm:text-lg font-bold tracking-tight">
-            <span style={{ color: "#a855f7" }}>Vipe</span>
+            <span style={{ color: colors.primary[500] }}>Vipe</span>
             <span className="text-white">Social</span>
           </span>
         </div>
@@ -272,15 +205,18 @@ export default function ResultadoAnalise({
               onClick={onVoltar}
               className="text-xs px-3 py-1.5 rounded-lg font-semibold transition-all"
               style={{
-                background: "rgba(168,85,247,0.15)",
-                border: "1px solid rgba(168,85,247,0.3)",
-                color: "#d8b4fe",
+                background: colors.button.novaAnaliseBg,
+                border: `1px solid ${colors.button.novaAnaliseBorder}`,
+                color: colors.button.novaAnaliseText,
               }}
             >
               ← Nova análise
             </button>
           )}
-          <button className="hover:text-white/70 transition-colors text-xl text-white/35">
+          <button
+            className="hover:text-white/70 transition-colors text-xl"
+            style={{ color: colors.text.white }}
+          >
             ☰
           </button>
         </div>
@@ -292,12 +228,12 @@ export default function ResultadoAnalise({
         <div
           className="w-full lg:w-[300] flex flex-col gap-4 p-4 overflow-y-auto shrink-0 border-b lg:border-b-0 lg:border-r"
           style={{
-            background: "#0f0f1c",
-            borderColor: "rgba(255,255,255,0.06)",
+            background: colors.background.sidebar,
+            borderColor: colors.border.light,
           }}
         >
           <p className="text-sm font-bold text-white/70 px-1">
-            Painel de Diagnóstico
+            Índice de Execução
           </p>
 
           <div className="flex justify-center py-1">
@@ -315,8 +251,8 @@ export default function ResultadoAnalise({
                 key={m.label}
                 className="rounded-xl p-3 flex flex-col gap-1 text-center"
                 style={{
-                  background: "#1a1a2e",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  background: colors.background.card,
+                  border: `1px solid ${colors.border.light}`,
                 }}
               >
                 <span className="text-[10px] text-white/40 leading-tight">
@@ -331,8 +267,8 @@ export default function ResultadoAnalise({
           <div
             className="rounded-xl p-4"
             style={{
-              background: "#1a1a2e",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: colors.background.card,
+              border: `1px solid ${colors.border.light}`,
             }}
           >
             <p className="text-xs font-bold text-white/70 mb-2">
@@ -355,8 +291,8 @@ export default function ResultadoAnalise({
           <div
             className="rounded-xl p-4"
             style={{
-              background: "#1a1a2e",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: colors.background.card,
+              border: `1px solid ${colors.border.light}`,
             }}
           >
             <p className="text-xs font-bold text-white/70 mb-3">
@@ -365,21 +301,21 @@ export default function ResultadoAnalise({
             <div className="flex flex-wrap items-center gap-1.5 text-xs">
               <span
                 className="px-2 py-1 rounded-md text-white/70"
-                style={{ background: "#2d1b69" }}
+                style={{ background: colors.background.cadeiaEmocional }}
               >
                 {p2.cadeia_emocional.emocao_de_entrada}
               </span>
               <span className="text-white/25">→</span>
               <span
                 className="px-2 py-1 rounded-md text-white/70"
-                style={{ background: "#2d1b69" }}
+                style={{ background: colors.background.cadeiaEmocional }}
               >
                 {p2.cadeia_emocional.emocao_de_desenvolvimento}
               </span>
               <span className="text-white/25">→</span>
               <span
                 className="px-2 py-1 rounded-md text-white/70"
-                style={{ background: "#2d1b69" }}
+                style={{ background: colors.background.cadeiaEmocional }}
               >
                 {p2.cadeia_emocional.emocao_de_saida}
               </span>
@@ -390,8 +326,8 @@ export default function ResultadoAnalise({
           <div
             className="rounded-xl p-4"
             style={{
-              background: "#1a1a2e",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: colors.background.card,
+              border: `1px solid ${colors.border.light}`,
             }}
           >
             <p className="text-xs font-bold text-white/70 mb-2">
@@ -415,8 +351,8 @@ export default function ResultadoAnalise({
             <div
               className="rounded-xl p-3.5 flex gap-2.5"
               style={{
-                background: "#1c1508",
-                border: "1px solid rgba(245,158,11,0.2)",
+                background: colors.background.alerta,
+                border: `1px solid ${colors.border.alerta}`,
               }}
             >
               <span className="text-amber-400 text-sm shrink-0 mt-0.5">⚠</span>
@@ -439,10 +375,10 @@ export default function ResultadoAnalise({
           </span>
           {/* Tabs */}
           <div
-            className="flex gap-1 rounded-xl p-1 overflow-x-auto"
+            className="flex gap-1 rounded-xl p-1 overflow-x-auto tabs-scroll"
             style={{
-              background: "#161625",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: colors.background.accordionClosed,
+              border: `1px solid ${colors.border.default}`,
             }}
           >
             {roteiros.map((r, i) => (
@@ -453,11 +389,11 @@ export default function ResultadoAnalise({
                 style={
                   activeTab === i
                     ? {
-                        background: "#7c3aed",
-                        color: "#fff",
-                        boxShadow: "0 2px 12px rgba(124,58,237,0.4)",
+                        background: colors.button.tabActive,
+                        color: colors.text.white,
+                        boxShadow: `0 2px 12px ${colors.button.tabShadow}`,
                       }
-                    : { color: "rgba(255,255,255,0.4)" }
+                    : { color: colors.button.tabInactive }
                 }
               >
                 {i + 1}. {r.cabecalho.titulo}
@@ -469,8 +405,8 @@ export default function ResultadoAnalise({
           <div
             className="rounded-xl p-4 sm:p-5"
             style={{
-              background: "#13131f",
-              border: "px solid rgba(255,255,255,0.07)",
+              background: colors.background.headerRoteiro,
+              border: `1px solid ${colors.border.default}`,
             }}
           >
             <h2 className="text-lg sm:text-xl font-black text-white mb-2 tracking-tight">
@@ -494,8 +430,8 @@ export default function ResultadoAnalise({
                   key={b.text}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs text-white/65"
                   style={{
-                    background: "#1e1e32",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: colors.background.badge,
+                    border: `1px solid ${colors.border.default}`,
                   }}
                 >
                   <span>{b.icon}</span>
@@ -515,9 +451,9 @@ export default function ResultadoAnalise({
                     key={tag}
                     className="text-[10px] px-2 py-0.5 rounded-full"
                     style={{
-                      background: "rgba(124,58,237,0.2)",
-                      color: "#c084fc",
-                      border: "1px solid rgba(124,58,237,0.3)",
+                      background: colors.hashtag.bg,
+                      color: colors.hashtag.text,
+                      border: `1px solid ${colors.hashtag.border}`,
                     }}
                   >
                     {tag.startsWith("#") ? tag : `#${tag}`}
@@ -689,8 +625,8 @@ export default function ResultadoAnalise({
                   key={i}
                   className="flex items-start gap-2 px-4 py-3.5 rounded-xl hover:brightness-110 transition-all"
                   style={{
-                    background: "linear-gradient(135deg, #3d1010, #2a0a0a)",
-                    border: "1px solid rgba(239,68,68,0.25)",
+                    background: colors.gradient.erro,
+                    border: `1px solid ${colors.border.erro}`,
                   }}
                 >
                   <span className="text-red-400 shrink-0 text-base mt-0.5">

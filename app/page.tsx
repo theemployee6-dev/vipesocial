@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import UploadVideoScreen from "@/components/UploadVideoScreen";
-import ResultadoAnalise from "@/components/NewResultadoAnalise";
-import type { VipeFullOutput } from "@/types/vipe.types";
+import UploadVideoScreen from "@/components/UploadVideoScreen/UploadVideoScreen";
+import ResultadoAnalise from "@/components/NewResultadoAnalise/NewResultadoAnalise";
+import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
+import { colors } from "@/lib/core/constants/colors"; // ajuste o caminho
 
 // ─── Particle canvas background ──────────────────────────
 function ParticleBackground() {
@@ -53,7 +54,7 @@ function ParticleBackground() {
         if (p.y > canvas.height) p.y = 0;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(167, 100, 255, ${p.alpha})`;
+        ctx.fillStyle = colors.particle.fill(p.alpha);
         ctx.fill();
       });
       for (let i = 0; i < COUNT; i++) {
@@ -65,7 +66,7 @@ function ParticleBackground() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(140, 70, 255, ${0.12 * (1 - d / 90)})`;
+            ctx.strokeStyle = colors.particle.stroke(0.12 * (1 - d / 90));
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -96,16 +97,12 @@ function GlowBorder({ children }: { children: React.ReactNode }) {
     <div className="relative w-full">
       <div
         className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          boxShadow:
-            "0 0 40px 6px rgba(140,70,255,0.35), 0 0 80px 12px rgba(100,40,220,0.18)",
-        }}
+        style={{ boxShadow: colors.glow.boxShadow }}
       />
       <div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(180,100,255,0.5) 0%, rgba(80,0,180,0.1) 50%, rgba(180,100,255,0.5) 100%)",
+          background: colors.background.glowGradient,
           padding: "1.5px",
           WebkitMask:
             "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -135,50 +132,51 @@ export default function Home() {
         <div
           className="fixed inset-0"
           style={{
-            background:
-              "radial-gradient(ellipse at 60% 20%, #1a0a2e 0%, #0d0515 40%, #060010 100%)",
+            background: colors.background.radial1,
             zIndex: -1,
           }}
         />
         <ParticleBackground />
 
         <div
-          className="fixed top-0 left-1/2 -translate-x-1/2 w-[700] h-[400] pointer-events-none"
+          className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[400] 4k:h-[600] pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse at center top, rgba(120,40,255,0.25) 0%, transparent 70%)",
+            background: colors.background.radial2,
             zIndex: 0,
           }}
         />
 
         <main
-          className="relative min-h-screen flex flex-col items-center px-4 py-6"
+          className="relative min-h-screen flex flex-col items-center px-4 py-6 4k:px-8 4k:py-10"
           style={{ zIndex: 1, fontFamily: "'Sora', 'Outfit', sans-serif" }}
         >
           {/* ── Navbar ── */}
-          <nav className="w-full max-w-5xl mx-auto flex items-center justify-between mb-10 sm:mb-14">
-            <button className="flex flex-col gap-1.5 p-1" aria-label="Menu">
-              <span className="block w-5 h-0.5 bg-gray-400" />
-              <span className="block w-5 h-0.5 bg-gray-400" />
+          <nav className="w-full max-w-5xl 4k:max-w-7xl mx-auto flex items-center justify-between mb-10 sm:mb-14 4k:mb-20">
+            <button
+              className="flex flex-col gap-1.5 p-1 4k:gap-2 4k:p-2"
+              aria-label="Menu"
+            >
+              <span className="block w-5 h-0.5 bg-gray-400 4k:w-8 4k:h-1" />
+              <span className="block w-5 h-0.5 bg-gray-400 4k:w-8 4k:h-1" />
             </button>
 
             <h1
-              className="text-3xl sm:text-5xl font-black tracking-tight"
-              style={{ color: "#f0e8ff" }}
+              className="text-3xl sm:text-5xl font-black tracking-tight 4k:text-7xl"
+              style={{ color: colors.text.title }}
             >
-              Vipe<span style={{ color: "#a855f7" }}>Social</span>
+              Vipe<span style={{ color: colors.primary[500] }}>Social</span>
             </h1>
 
             <button
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all 4k:px-6 4k:py-3 4k:text-base"
               style={{
-                background: "rgba(168,85,247,0.15)",
-                border: "1px solid rgba(168,85,247,0.4)",
-                color: "#d8b4fe",
+                background: colors.button.entrarBg,
+                border: `1px solid ${colors.button.entrarBorder}`,
+                color: colors.button.entrarText,
               }}
             >
               <svg
-                className="w-3.5 h-3.5"
+                className="w-3.5 h-3.5 4k:w-5 4k:h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -190,18 +188,20 @@ export default function Home() {
 
           {/* ── Hero title (só aparece antes do resultado) ── */}
           {!resultado && (
-            <div className="text-center mb-10 sm:mb-12 px-2">
+            <div className="text-center mb-10 sm:mb-12 px-2 4k:mb-20">
               <h2
-                className="text-3xl sm:text3xl md:text-4xl lg:text-5xl font-black leading-tight mb-4"
-                style={{ color: "#f5f0ff" }}
+                className="text-3xl sm:text3xl md:text-4xl lg:text-5xl font-black leading-tight mb-4 4k:text-7xl 4k:mb-6"
+                style={{ color: colors.text.heroTitle }}
               >
                 Transforme vídeos virais em <br className="hidden sm:block" />
-                <span style={{ color: "#a855f7" }}>scripts prontos</span> em
-                segundos.
+                <span style={{ color: colors.primary[500] }}>
+                  scripts prontos
+                </span>{" "}
+                em segundos.
               </h2>
               <p
-                className="text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
-                style={{ color: "rgba(200,180,255,0.65)" }}
+                className="text-sm sm:text-base max-w-xl mx-auto leading-relaxed 4k:text-2xl 4k:max-w-3xl"
+                style={{ color: colors.text.heroSub }}
               >
                 Faça upload de um vídeo viral e receba a engenharia reversa
                 completa + 5 ideias baseadas no mesmo padrão.
@@ -210,19 +210,17 @@ export default function Home() {
           )}
 
           {/* ── Upload / Result area ── */}
-          <div className="w-full max-w-2xl mx-auto">
+          <div className="w-full max-w-2xl 4k:max-w-4xl mx-auto">
             {!resultado && (
-              <div className="flex flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-6 4k:gap-8">
                 <GlowBorder>
                   <div
-                    className="w-full rounded-2xl p-1"
+                    className="w-full rounded-2xl p-1 4k:p-2"
                     style={{
-                      background:
-                        "linear-gradient(145deg, rgba(30,12,60,0.95) 0%, rgba(15,5,35,0.98) 100%)",
-                      border: "1px solid rgba(140,60,255,0.3)",
+                      background: colors.background.uploadGradient,
+                      border: `1px solid ${colors.border.upload}`,
                     }}
                   >
-                    {/* UploadVideo.aoFinalizar agora recebe VipeFullOutput */}
                     <UploadVideoScreen
                       aoFinalizar={(data) => setResultado(data)}
                     />
@@ -230,11 +228,11 @@ export default function Home() {
                 </GlowBorder>
 
                 <p
-                  className="text-xs text-center"
-                  style={{ color: "rgba(180,150,255,0.55)" }}
+                  className="text-xs text-center 4k:text-base"
+                  style={{ color: colors.text.stats }}
                 >
                   +3.482 vídeos analisados essa semana •{" "}
-                  <span style={{ color: "rgba(200,170,255,0.75)" }}>
+                  <span style={{ color: colors.text.statsSpan }}>
                     Criadores aumentaram em média 217% o alcance.
                   </span>
                 </p>
@@ -244,14 +242,14 @@ export default function Home() {
 
           {/* ── Features strip (só no estado inicial) ── */}
           {!resultado && (
-            <div className="w-full max-w-2xl mx-auto mt-12 sm:mt-16">
-              <div className="flex justify-center mb-5">
+            <div className="w-full max-w-2xl 4k:max-w-4xl mx-auto mt-12 sm:mt-16 4k:mt-24">
+              <div className="flex justify-center mb-5 4k:mb-8">
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black 4k:w-14 4k:h-14 4k:text-xl"
                   style={{
-                    background: "rgba(168,85,247,0.18)",
-                    border: "1.5px solid rgba(168,85,247,0.45)",
-                    color: "#c084fc",
+                    background: colors.border.numberBg,
+                    border: `1.5px solid ${colors.border.numberBorder}`,
+                    color: colors.misc.numberColor,
                   }}
                 >
                   2
@@ -259,26 +257,25 @@ export default function Home() {
               </div>
 
               <div
-                className="rounded-2xl p-5 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10"
+                className="rounded-2xl p-5 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10 4k:p-10 4k:gap-16"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(30,10,60,0.85) 0%, rgba(15,5,35,0.9) 100%)",
-                  border: "1px solid rgba(100,40,200,0.25)",
-                  boxShadow: "0 8px 40px rgba(80,0,180,0.15)",
+                  background: colors.background.featuresGradient,
+                  border: `1px solid ${colors.border.featuresCard}`,
+                  boxShadow: colors.misc.featureShadow,
                 }}
               >
-                <div className="flex items-center gap-4 flex-1">
+                <div className="flex items-center gap-4 flex-1 4k:gap-6">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 4k:w-20 4k:h-20 4k:rounded-2xl"
                     style={{
-                      background: "rgba(100,40,200,0.2)",
-                      border: "1px solid rgba(140,70,255,0.3)",
+                      background: colors.border.featuresIconBg,
+                      border: `1px solid ${colors.border.featuresIcon}`,
                     }}
                   >
                     <svg
-                      className="w-6 h-6"
+                      className="w-6 h-6 4k:w-10 4k:h-10"
                       fill="none"
-                      stroke="#a855f7"
+                      stroke={colors.misc.iconStroke}
                       strokeWidth={2}
                       viewBox="0 0 24 24"
                     >
@@ -291,14 +288,14 @@ export default function Home() {
                   </div>
                   <div>
                     <p
-                      className="font-bold text-sm"
-                      style={{ color: "#ede9fe" }}
+                      className="font-bold text-sm 4k:text-xl"
+                      style={{ color: colors.text.featuresTextLight }}
                     >
                       Faça upload de
                     </p>
                     <p
-                      className="font-black text-base"
-                      style={{ color: "#f5f0ff" }}
+                      className="font-black text-base 4k:text-2xl"
+                      style={{ color: colors.text.featuresTextDark }}
                     >
                       um vídeo viral
                     </p>
@@ -306,22 +303,22 @@ export default function Home() {
                 </div>
 
                 <div
-                  className="hidden sm:block w-px h-12 self-center"
-                  style={{ background: "rgba(140,70,255,0.2)" }}
+                  className="hidden sm:block w-px h-12 self-center 4k:h-20"
+                  style={{ background: colors.misc.featureDivider }}
                 />
 
-                <div className="flex items-center gap-4 flex-1">
+                <div className="flex items-center gap-4 flex-1 4k:gap-6">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 4k:w-20 4k:h-20 4k:rounded-2xl"
                     style={{
-                      background: "rgba(100,40,200,0.2)",
-                      border: "1px solid rgba(140,70,255,0.3)",
+                      background: colors.border.featuresIconBg,
+                      border: `1px solid ${colors.border.featuresIcon}`,
                     }}
                   >
                     <svg
-                      className="w-6 h-6"
+                      className="w-6 h-6 4k:w-10 4k:h-10"
                       fill="none"
-                      stroke="#a855f7"
+                      stroke={colors.misc.iconStroke}
                       strokeWidth={2}
                       viewBox="0 0 24 24"
                     >
@@ -334,14 +331,14 @@ export default function Home() {
                   </div>
                   <div>
                     <p
-                      className="font-bold text-sm"
-                      style={{ color: "#ede9fe" }}
+                      className="font-bold text-sm 4k:text-xl"
+                      style={{ color: colors.text.featuresTextLight }}
                     >
                       Implemente
                     </p>
                     <p
-                      className="font-black text-base"
-                      style={{ color: "#f5f0ff" }}
+                      className="font-black text-base 4k:text-2xl"
+                      style={{ color: colors.text.featuresTextDark }}
                     >
                       scripts virais 💡
                     </p>
@@ -350,8 +347,8 @@ export default function Home() {
               </div>
 
               <p
-                className="text-center text-xs mt-4 leading-relaxed"
-                style={{ color: "rgba(180,150,255,0.45)" }}
+                className="text-center text-xs mt-4 leading-relaxed 4k:text-base 4k:mt-6"
+                style={{ color: colors.text.featuresFooter }}
               >
                 Agora improvise os scripts, use as ferramentas do app para criar
                 conteúdo próprio e alcançar novos ideais.
@@ -359,7 +356,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="h-16" />
+          <div className="h-16 4k:h-24" />
         </main>
 
         <style>{`
