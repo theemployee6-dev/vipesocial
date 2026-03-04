@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import UploadVideoScreen from "@/components/UploadVideoScreen/UploadVideoScreen";
-import ResultadoAnalise from "@/components/NewResultadoAnalise/NewResultadoAnalise";
+import ResultadoAnalise from "@/components/ResultadoAnalise/ResultadoAnalise";
 import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
 import { colors } from "@/lib/core/constants/colors"; // ajuste o caminho
 

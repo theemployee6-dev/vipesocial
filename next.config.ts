@@ -3,18 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   turbopack: {},
   /* config options here */
-  allowedDevOrigins: ["localhost:3001", "192.168.15.202"],
+  allowedDevOrigins: ["localhost:3000", "192.168.15.202"],
   experimental: {
     webpackBuildWorker: false, // 👈 Desativa o build worker
   },
-  // webpack: (config) => {
-  //   config.experiments = {
-  //     ...config.experiments,
-  //     asyncWebAssembly: true,
-  //     layers: true,
-  //   };
-  //   return config;
-  // },
 };
 
 export default nextConfig;

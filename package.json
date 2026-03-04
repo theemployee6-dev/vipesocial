@@ -12,6 +12,7 @@
     "@google/genai": "^1.43.0",
     "@openrouter/sdk": "^0.9.11",
     "@supabase/supabase-js": "^2.95.3",
+    "jsonrepair": "^3.13.2",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
