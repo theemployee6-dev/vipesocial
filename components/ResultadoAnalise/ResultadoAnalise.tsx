@@ -14,7 +14,7 @@ interface ResultadoAnaliseProps {
 // ─── Pages config ──────────────────────────────────────────────────────────────
 const PAGES = [
   { id: "viralizou" as const, label: "Por que Viralizou?", icon: "🔥" },
-  { id: "gravar" as const, label: "O que Gravar", icon: "💡" },
+  { id: "gravar" as const, label: "O que Gravar?", icon: "💡" },
   { id: "quando" as const, label: "Calendário", icon: "📅" },
 ] as const;
 
@@ -129,7 +129,7 @@ export default function ResultadoAnalise({
       </div>
 
       {/* ── PAGE HEADER ── */}
-      <div className="px-4 sm:px-6 pt-5 pb-0 max-w-5xl mx-auto">
+      <div className="px-4 sm:px-6 pt-5 pb-0 max-w-5xl 4k:max-w-screen-2xl mx-auto">
         <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">
           Análise Completa · {resultado.nicho_confirmado}
         </p>
@@ -141,7 +141,7 @@ export default function ResultadoAnalise({
       </div>
 
       {/* ── CONTENT ── */}
-      <div className="px-4 sm:px-6 py-5 max-w-5xl mx-auto">
+      <div className="px-4 sm:px-6 py-5 max-w-5xl 4k:max-w-screen-2xl mx-auto">
         {activePage === "viralizou" && (
           <PorQueViralizou
             resultado={resultado}
