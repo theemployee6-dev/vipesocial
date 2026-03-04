@@ -9,61 +9,6 @@ interface TooltipProps {
   className?: string;
 }
 
-// export function Tooltip({ term, children, className = "" }: TooltipProps) {
-//   const text = tooltipTerms[term];
-//   if (!text) return <span className={className}>{children}</span>;
-
-//   return (
-//     <span
-//       className={`group relative inline-flex items-center gap-1 cursor-help ${className}`}
-//     >
-//       {children}
-//       <span
-//         className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-[9px] font-bold shrink-0"
-//         style={{
-//           background: "rgba(0,255,136,0.12)",
-//           color: colors.primary[500],
-//           border: `1px solid rgba(0,255,136,0.3)`,
-//         }}
-//       >
-//         ?
-//       </span>
-//       {/* Tooltip box */}
-//       <span
-//         className="invisible group-hover:visible opacity-0 group-hover:opacity-100
-//           transition-all duration-200 ease-out
-//           absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-//           w-56 z-50 rounded-xl p-3 pointer-events-none"
-//         style={{
-//           background: colors.background.tooltip,
-//           border: `1px solid ${colors.border.glow}`,
-//           boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
-//           transform: "translateX(-50%) translateY(4px)",
-//         }}
-//       >
-//         <span
-//           className="block text-[10px] font-bold mb-1.5"
-//           style={{ color: colors.primary[500] }}
-//         >
-//           {term}
-//         </span>
-//         <span className="text-[11px] text-white/60 leading-relaxed">
-//           {text}
-//         </span>
-//         {/* Arrow */}
-//         <span
-//           className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45"
-//           style={{
-//             background: colors.background.tooltip,
-//             borderRight: `1px solid ${colors.border.glow}`,
-//             borderBottom: `1px solid ${colors.border.glow}`,
-//           }}
-//         />
-//       </span>
-//     </span>
-//   );
-// }
-
 export function Tooltip({ term, children, className = "" }: TooltipProps) {
   const text = tooltipTerms[term];
   const [pos, setPos] = useState({ top: 0, left: 0 });
