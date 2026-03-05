@@ -70,64 +70,70 @@ export default function ResultadoAnalise({
           </span>
         </div>
 
-        {/* Page tabs */}
-        <div
-          className="flex rounded-xl p-1 gap-1 overflow-x-auto"
-          style={{
-            background: colors.background.card,
-            border: `1px solid ${colors.border.default}`,
-          }}
-        >
-          {PAGES.map((page) => {
-            const isActive = activePage === page.id;
-            return (
-              <button
-                key={page.id}
-                onClick={() => setActivePage(page.id)}
-                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all"
-                style={
-                  isActive
-                    ? {
-                        background: colors.button.tabActive,
-                        color: colors.primary[500],
-                        border: `1px solid rgba(0,255,136,0.3)`,
-                        boxShadow: `0 2px 12px ${colors.button.tabShadow}`,
-                      }
-                    : {
-                        color: colors.button.tabInactive,
-                        border: "1px solid transparent",
-                        background: "transparent",
-                      }
-                }
-              >
-                <span>{page.icon}</span>
-                <span className="hidden sm:inline">{page.label}</span>
-                <span className="sm:hidden">
-                  {page.label.split(" ").slice(-1)[0]}
-                </span>
-              </button>
-            );
-          })}
+        <div className="flex item-center justify-center">
+          <span className="text-sm sm:text-lg font-bold tracking-tight">
+            Resultado da Análise
+          </span>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
-          {onVoltar && (
-            <button
-              onClick={onVoltar}
-              className="text-xs px-3 py-1.5 rounded-lg font-semibold transition-all hidden sm:block"
-              style={{
-                background: colors.button.novaAnaliseBg,
-                border: `1px solid ${colors.button.novaAnaliseBorder}`,
-                color: colors.button.novaAnaliseText,
-              }}
-            >
-              ← Nova análise
-            </button>
-          )}
+        <div className="flex items-center gap-3 justify-end">
+          <div className="flex item-center gap-3">
+            {onVoltar && (
+              <button
+                onClick={onVoltar}
+                className="text-xs px-3 py-1.5 rounded-lg font-semibold transition-all"
+                style={{
+                  background: colors.button.novaAnaliseBg,
+                  border: `1px solid ${colors.button.novaAnaliseBorder}`,
+                  color: colors.button.novaAnaliseText,
+                }}
+              >
+                ← Nova análise
+              </button>
+            )}
+          </div>
         </div>
       </div>
-
+      {/* Page tabs */}
+      <div
+        className="flex rounded-xl p-1 justify-center gap-1 overflow-x-auto"
+        style={{
+          background: colors.background.card,
+          border: `1px solid ${colors.border.default}`,
+        }}
+      >
+        {PAGES.map((page) => {
+          const isActive = activePage === page.id;
+          return (
+            <button
+              key={page.id}
+              onClick={() => setActivePage(page.id)}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all"
+              style={
+                isActive
+                  ? {
+                      background: colors.button.tabActive,
+                      color: colors.primary[500],
+                      border: `1px solid rgba(0,255,136,0.3)`,
+                      boxShadow: `0 2px 12px ${colors.button.tabShadow}`,
+                    }
+                  : {
+                      color: colors.button.tabInactive,
+                      border: "1px solid transparent",
+                      background: "transparent",
+                    }
+              }
+            >
+              <span>{page.icon}</span>
+              <span className="hidden sm:inline">{page.label}</span>
+              <span className="sm:hidden">
+                {page.label.split(" ").slice(-1)[0]}
+              </span>
+            </button>
+          );
+        })}
+      </div>
       {/* ── PAGE HEADER ── */}
       <div className="px-4 sm:px-6 pt-5 pb-0 max-w-5xl 4k:max-w-screen-2xl mx-auto">
         <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">
