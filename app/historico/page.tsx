@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
 import ResultadoAnalise from "@/components/ResultadoAnalise/ResultadoAnalise";
 import Link from "next/link";
+import Logo from "@/shared/ui/Logo";
 
 interface AnaliseRow {
   id: string;
@@ -69,16 +70,7 @@ export default function HistoricoPage() {
         }}
       >
         <div className="flex items-center gap-2.5">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-white text-sm"
-            style={{ background: "linear-gradient(135deg, #00ff88, #00cc55)" }}
-          >
-            V
-          </div>
-          <span className="text-base font-bold tracking-tight">
-            <span style={{ color: "#00ff88" }}>Vipe</span>
-            <span className="text-white">Social</span>
-          </span>
+          <Logo />
         </div>
         <h1 className="text-sm font-bold text-white/70">
           Histórico de Análises

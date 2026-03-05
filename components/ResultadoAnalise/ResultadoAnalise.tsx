@@ -4,6 +4,7 @@ import { useResultadoAnalise } from "./hooks/useResultadoAnalise";
 import PorQueViralizou from "../ResultadoAnalise/ui/PorQueViralizou";
 import OQueGravar from "../ResultadoAnalise/ui/OQueGravar";
 import Calendario from "../ResultadoAnalise/ui/Calendario";
+import Logo from "@/shared/ui/Logo";
 
 // ─── Props ─────────────────────────────────────────────────────────────────────
 interface ResultadoAnaliseProps {
@@ -58,16 +59,7 @@ export default function ResultadoAnalise({
       >
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-white text-sm shrink-0"
-            style={{ background: colors.gradient.logo }}
-          >
-            V
-          </div>
-          <span className="text-base sm:text-lg font-bold tracking-tight">
-            <span style={{ color: colors.primary[500] }}>Vipe</span>
-            <span className="text-white">Social</span>
-          </span>
+          <Logo />
         </div>
 
         <div className="flex item-center justify-center">
