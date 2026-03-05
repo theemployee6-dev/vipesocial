@@ -1,6 +1,6 @@
 import type { ConceitoComRoteiro } from "../hooks/useResultadoAnalise";
 import { colors } from "../constants/colors.ResultadoAnalise";
-import { Tooltip } from "../index";
+import { Tooltip } from "./index";
 
 const DIAS_SEMANA = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 

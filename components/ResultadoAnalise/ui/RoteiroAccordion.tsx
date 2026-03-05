@@ -1,6 +1,6 @@
 import type { VipeRoteiro } from "@/lib/core/domain/vipe.types";
 import { colors } from "../constants/colors.ResultadoAnalise";
-import { Tooltip, IntensityBar, InfoRow } from "../index";
+import { Tooltip, IntensityBar, InfoRow } from "./index";
 import { parseIntensidade, SEGMENTOS } from "../hooks/useResultadoAnalise";
 
 type InnerTab =

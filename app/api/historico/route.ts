@@ -13,11 +13,10 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // resultado_completo pode estar duplamente stringificado
+  // resultado_completo stringificado
   const parsed = data.map((row) => {
     let resultado = row.resultado_completo;
     try {
-      if (typeof resultado === "string") resultado = JSON.parse(resultado);
       if (typeof resultado === "string") resultado = JSON.parse(resultado);
     } catch {
       resultado = null;

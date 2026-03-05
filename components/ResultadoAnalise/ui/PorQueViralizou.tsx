@@ -7,7 +7,7 @@ import {
   Accordion,
   InfoRow,
   Tag,
-} from "../index";
+} from "./index";
 import { parseIntensidade } from "../hooks/useResultadoAnalise";
 
 interface Props {

@@ -1,7 +1,7 @@
 import type { ConceitoComRoteiro } from "../hooks/useResultadoAnalise";
 import type { VipePrompt3Output } from "@/lib/core/domain/vipe.types";
 import { colors } from "../constants/colors.ResultadoAnalise";
-import { Tooltip, HexBadge, Tag } from "../index";
+import { Tooltip, HexBadge, Tag } from "./index";
 import { RoteiroAccordion } from "./RoteiroAccordion";
 
 interface Props {

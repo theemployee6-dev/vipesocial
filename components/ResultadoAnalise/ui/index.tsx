@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { tooltipTerms } from "./constants/tooltipTerms";
-import { colors } from "./constants/colors.ResultadoAnalise";
+import { tooltipTerms } from "../constants/tooltipTerms";
+import { colors } from "../constants/colors.ResultadoAnalise";
 
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 interface TooltipProps {
