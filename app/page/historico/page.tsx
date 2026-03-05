@@ -132,6 +132,11 @@ export default function HistoricoPage() {
                   {formatData(analise.criado_em)}
                 </p>
 
+                {/* vídeo image */}
+                <div className="mb-3">
+                  <video src={analise.video_url} className="w-full h-auto" />
+                </div>
+
                 {/* Nicho */}
                 <span
                   className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold mb-3"
