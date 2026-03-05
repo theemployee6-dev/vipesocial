@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   description: "Desenvolvido por webWill",
   icons: {
     icon: [
+      {
+        url: "/assets/img/fav_icon/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
       { url: "/assets/img/fav_icon/favicon.ico", sizes: "any" },
       {
         url: "/assets/img/fav_icon/favicon-16x16.png",
@@ -28,11 +33,7 @@ export const metadata: Metadata = {
         type: "image/png",
         sizes: "32x32",
       },
-      {
-        url: "/assets/img/fav_icon/android-chrome-192x192.png",
-        type: "image/png",
-        sizes: "192x192",
-      },
+
       {
         url: "/assets/img/fav_icon/android-chrome-512x512.png",
         type: "image/png",
