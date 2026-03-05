@@ -17,31 +17,30 @@ export const metadata: Metadata = {
   description: "Desenvolvido por webWill",
   icons: {
     icon: [
+      { url: "/assets/img/fav_icon/favicon.svg", type: "image/svg+xml" },
       {
         url: "/assets/img/fav_icon/android-chrome-192x192.png",
         type: "image/png",
         sizes: "192x192",
       },
-      { url: "/assets/img/fav_icon/favicon.ico", sizes: "any" },
       {
-        url: "/assets/img/fav_icon/favicon-16x16.png",
+        url: "/assets/img/fav_icon/android-chrome-512x512.png",
         type: "image/png",
-        sizes: "16x16",
+        sizes: "512x512",
       },
       {
         url: "/assets/img/fav_icon/favicon-32x32.png",
         type: "image/png",
         sizes: "32x32",
       },
-
       {
-        url: "/assets/img/fav_icon/android-chrome-512x512.png",
+        url: "/assets/img/fav_icon/favicon-16x16.png",
         type: "image/png",
-        sizes: "512x512",
+        sizes: "16x16",
       },
+      { url: "/assets/img/fav_icon/favicon.ico", sizes: "any" },
     ],
     apple: "/assets/img/fav_icon/apple-touch-icon.png",
-    shortcut: "/assets/img/fav_icon/favicon.ico",
   },
 };
 
