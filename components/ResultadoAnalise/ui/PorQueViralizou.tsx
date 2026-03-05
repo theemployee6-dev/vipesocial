@@ -274,16 +274,11 @@ export default function PorQueViralizou({
                   {item.value}
                 </p>
               </div>
-              {i < arr.length - 1 && (
-                <span className="text-white/20 shrink-0 sm:hidden">→</span>
-              )}
+              {/* {i < arr.length - 1 && (
+                <span className="text-white/20 shrink-0">→d</span>
+              )} */}
             </div>
           ))}
-        </div>
-        {/* Arrows for desktop */}
-        <div className="hidden sm:flex justify-between px-[calc(33%-8px)] mt-1">
-          <span className="text-white/20 text-sm">→</span>
-          <span className="text-white/20 text-sm">→</span>
         </div>
       </CardSection>
 
