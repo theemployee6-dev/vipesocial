@@ -274,9 +274,9 @@ export default function PorQueViralizou({
                   {item.value}
                 </p>
               </div>
-              {/* {i < arr.length - 1 && (
-                <span className="text-white/20 shrink-0">→d</span>
-              )} */}
+              {i < arr.length - 1 && (
+                <span className="hidden sm:text-white/20 sm:shrink-0">→</span>
+              )}
             </div>
           ))}
         </div>
