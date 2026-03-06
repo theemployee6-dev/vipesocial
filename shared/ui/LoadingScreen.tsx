@@ -260,8 +260,8 @@ export default function LoadingScreen({
           position: relative;
           width: clamp(140px, 20vw, 520px);
           height: clamp(178px, 25vw, 660px);
-          -webkit-mask-image: url('./assets/img/logo/logo_v_sem_fundo.png');
-          mask-image: url('/assets/img/logo/logo_v_sem_fundo.png');
+          -webkit-mask-image: url('./assets/img/logo/logo_v_fundo_transparente.png');
+          mask-image: url('/assets/img/logo/logo_v_fundo_transparente.png');
           -webkit-mask-size: contain;
           mask-size: contain;
           -webkit-mask-repeat: no-repeat;
