@@ -18,27 +18,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/assets/img/fav_icon/android-chrome-512x512.png",
+        url: "/assets/img/logo/logo_V_sem_fundo.png",
         type: "image/png",
-        sizes: "512x512",
+        sizes: "1024x1536",
       },
-      // {
-      //   url: "/assets/img/fav_icon/android-chrome-192x192.png",
-      //   type: "image/png",
-      //   sizes: "192x192",
-      // },
 
-      // {
-      //   url: "/assets/img/fav_icon/favicon-32x32.png",
-      //   type: "image/png",
-      //   sizes: "32x32",
-      // },
-      // {
-      //   url: "/assets/img/fav_icon/favicon-16x16.png",
-      //   type: "image/png",
-      //   sizes: "16x16",
-      // },
-      { url: "/assets/img/fav_icon/favicon.ico", sizes: "any" },
+      {
+        url: "/assets/img/fav_icon/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
     ],
     apple: "/assets/img/fav_icon/apple-touch-icon.png",
   },
