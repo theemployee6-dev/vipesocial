@@ -2005,7 +2005,7 @@ export default function LandingPage() {
               { val: "4", lbl: "Camadas de IA" },
               { val: "5", lbl: "Roteiros por análise" },
               { val: "95%", lbl: "Prob. viral" },
-              { val: "<2min", lbl: "Tempo de entrega" },
+              { val: "menos de 2min", lbl: "Tempo de entrega" },
             ].map((m) => (
               <div key={m.lbl} style={{ textAlign: "center" }}>
                 <div className="metric-val">{m.val}</div>
@@ -2020,9 +2020,10 @@ export default function LandingPage() {
             <div className="dash-frame">
               <div className="dash-topbar">
                 <div className="dash-logo">
-                  <div className="dash-logo-icon">V</div>
+                  {/* <div className="dash-logo-icon">V</div> */}
                   <span>
-                    <span style={{ color: "var(--green)" }}>Vipe</span>Social
+                    {/* <span style={{ color: "var(--green)" }}>Vipe</span>Social */}
+                    <Logo />
                   </span>
                 </div>
                 <div className="dash-tabs">
@@ -2213,9 +2214,10 @@ export default function LandingPage() {
               <div className="dash-frame">
                 <div className="dash-topbar">
                   <div className="dash-logo">
-                    <div className="dash-logo-icon">V</div>
+                    {/* <div className="dash-logo-icon">V</div> */}
                     <span>
-                      <span style={{ color: "var(--green)" }}>Vipe</span>Social
+                      {/* <span style={{ color: "var(--green)" }}>Vipe</span>Social */}
+                      <Logo />
                     </span>
                   </div>
                   <div className="dash-tabs">
@@ -2710,10 +2712,11 @@ export default function LandingPage() {
         {/* FOOTER */}
         <footer className="lp-footer">
           <a href="#" className="lp-logo">
-            <div className="lp-logo-icon">V</div>
-            <div className="lp-logo-text">
+            <Logo />
+            {/* <div className="lp-logo-icon">V</div> */}
+            {/* <div className="lp-logo-text">
               <span>Vipe</span>Social
-            </div>
+            </div> */}
           </a>
           <p className="footer-note">
             © 2026 VipeSocial. Todos os direitos reservados.

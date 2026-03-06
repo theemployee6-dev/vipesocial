@@ -3,7 +3,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <div className="relative w-[100] sm:w-[120] md:w-[140] lg:w-[160] xl:w-[180] 2xl:w-[200] 4k:w-[240] h-auto aspect-120/23">
+    <div className="relative w-[100] sm:w-[120] md:w-[140] lg:w-[160] xl:w-[180] 2xl:w-[200] 4k:w-[240] h-auto aspect-50/20">
       <Image
         src="/assets/img/logo/logo_header_sem_fundo_menor.png"
         alt="logo-image"
