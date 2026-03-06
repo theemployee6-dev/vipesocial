@@ -11,7 +11,7 @@ interface FeatureRowProps {
   reverse?: boolean;
 }
 
-export const FeatureRow = ({
+const FeatureRow = ({
   icon,
   title,
   description,
@@ -49,3 +49,5 @@ export const FeatureRow = ({
     </div>
   );
 };
+
+export default FeatureRow;

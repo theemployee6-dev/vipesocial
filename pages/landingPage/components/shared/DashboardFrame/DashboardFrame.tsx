@@ -2,7 +2,7 @@
 import Logo from "@/shared/ui/Logo";
 import styles from "./DashboardFrame.module.css";
 
-export const DashboardFrame = () => {
+const DashboardFrame = () => {
   return (
     <>
       <div className={styles.dashGlowBottom} />
@@ -121,3 +121,5 @@ export const DashboardFrame = () => {
     </>
   );
 };
+
+export default DashboardFrame;

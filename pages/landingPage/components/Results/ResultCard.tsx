@@ -15,7 +15,7 @@ interface ResultCardProps {
   warnText?: string;
 }
 
-export const ResultCard = (props: ResultCardProps) => {
+const ResultCard = (props: ResultCardProps) => {
   const {
     type,
     label,
@@ -106,3 +106,5 @@ export const ResultCard = (props: ResultCardProps) => {
     </div>
   );
 };
+
+export default ResultCard;

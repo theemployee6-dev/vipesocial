@@ -2,7 +2,7 @@
 import Logo from "@/shared/ui/Logo";
 import styles from "./Footer.module.css";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <a href="#" className={styles.logo}>
@@ -14,3 +14,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;

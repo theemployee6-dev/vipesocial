@@ -1,11 +1,11 @@
 "use client";
 // import { Reveal } from "../shared/Reveal/Reveal";
-import { Step } from "./Step";
+import Step from "./Step";
 import { stepsStrings } from "./constants/steps";
-import { DashboardFrame } from "../shared/DashboardFrame/DashboardFrame";
+import DashboardFrame from "../shared/DashboardFrame/DashboardFrame";
 import styles from "./HowItWorksSection.module.css";
 
-export const HowItWorksSection = () => {
+const HowItWorksSection = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -34,3 +34,5 @@ export const HowItWorksSection = () => {
     </section>
   );
 };
+
+export default HowItWorksSection;

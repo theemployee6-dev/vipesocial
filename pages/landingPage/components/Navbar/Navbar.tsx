@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Logo from "@/shared/ui/Logo"; // ajuste o caminho conforme seu projeto
 import styles from "./Navbar.module.css";
 
-export const Navbar = () => {
+const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;

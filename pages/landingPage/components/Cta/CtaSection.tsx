@@ -2,7 +2,7 @@
 // import { Reveal } from "../shared/Reveal/Reveal";
 import styles from "./CtaSection.module.css";
 
-export const CtaSection = () => {
+const CtaSection = () => {
   return (
     <section className={styles.cta}>
       <div className={styles.glow} />
@@ -28,3 +28,5 @@ export const CtaSection = () => {
     </section>
   );
 };
+
+export default CtaSection;

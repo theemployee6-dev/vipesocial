@@ -1,11 +1,11 @@
 "use client";
-import { Reveal } from "../shared/Reveal/Reveal";
-import { HeroMetrics } from "./HeroMetrics";
-import { HeroBadge } from "./HeroBadge";
-import { DashboardFrame } from "../shared/DashboardFrame/DashboardFrame";
+import Reveal from "../shared/Reveal/Reveal";
+import HeroMetrics from "./HeroMetrics";
+import HeroBadge from "./HeroBadge";
+import DashboardFrame from "../shared/DashboardFrame/DashboardFrame";
 import styles from "./HeroSection.module.css";
 
-export const HeroSection = () => {
+const HeroSection = () => {
   return (
     <section className={styles.hero}>
       <div className={styles.heroGrid} />
@@ -52,3 +52,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+export default HeroSection;

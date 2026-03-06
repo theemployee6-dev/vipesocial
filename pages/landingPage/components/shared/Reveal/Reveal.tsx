@@ -8,11 +8,7 @@ interface RevealProps {
   threshold?: number;
 }
 
-export const Reveal = ({
-  children,
-  delay = 0,
-  threshold = 0.1,
-}: RevealProps) => {
+const Reveal = ({ children, delay = 0, threshold = 0.1 }: RevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,3 +36,5 @@ export const Reveal = ({
     </div>
   );
 };
+
+export default Reveal;

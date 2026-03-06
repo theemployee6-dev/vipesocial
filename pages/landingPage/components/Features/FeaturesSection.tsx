@@ -1,6 +1,6 @@
 "use client";
 // import { Reveal } from "../shared/Reveal/Reveal";
-import { FeatureRow } from "./FeatureRow";
+import FeatureRow from "./FeatureRow";
 import styles from "./FeaturesSection.module.css";
 
 const features = [
@@ -159,7 +159,7 @@ const features = [
   },
 ];
 
-export const FeaturesSection = () => {
+const FeaturesSection = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -183,3 +183,5 @@ export const FeaturesSection = () => {
     </section>
   );
 };
+
+export default FeaturesSection;

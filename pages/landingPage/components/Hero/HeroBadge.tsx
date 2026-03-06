@@ -1,6 +1,6 @@
 import styles from "./HeroBadge.module.css";
 
-export const HeroBadge = () => {
+const HeroBadge = () => {
   return (
     <div className={styles.badge}>
       <div className={styles.dot} />
@@ -8,3 +8,5 @@ export const HeroBadge = () => {
     </div>
   );
 };
+
+export default HeroBadge;

@@ -1,7 +1,7 @@
 import { metricsStrings } from "./constants/metrics";
 import styles from "./HeroMetrics.module.css";
 
-export const HeroMetrics = () => {
+const HeroMetrics = () => {
   return (
     <div className={styles.metrics}>
       {metricsStrings.map((m) => (
@@ -13,3 +13,5 @@ export const HeroMetrics = () => {
     </div>
   );
 };
+
+export default HeroMetrics;

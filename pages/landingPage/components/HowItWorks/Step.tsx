@@ -8,7 +8,7 @@ interface StepProps {
   arrow: boolean;
 }
 
-export const Step = ({ n, icon, title, desc, arrow }: StepProps) => {
+const Step = ({ n, icon, title, desc, arrow }: StepProps) => {
   return (
     <div className={styles.step}>
       <div className={styles.stepNum}>Passo {n}</div>
@@ -19,3 +19,5 @@ export const Step = ({ n, icon, title, desc, arrow }: StepProps) => {
     </div>
   );
 };
+
+export default Step;
