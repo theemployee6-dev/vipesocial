@@ -1,0 +1,12 @@
+.reveal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* mantém as animações originais */
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

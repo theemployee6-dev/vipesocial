@@ -1,0 +1,142 @@
+.cta {
+  background: var(--bg);
+  padding: 100px 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 255, 136, 0.08) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ctaH2 {
+  font-size: clamp(32px, 8vw, 52px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.ctaH2 .ac {
+  color: var(--green);
+}
+
+.ctaSub {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 100%;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+  position: relative;
+  padding: 0 10px;
+}
+
+.btnCta {
+  background: var(--green);
+  color: #04070e;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.2);
+  position: relative;
+  white-space: nowrap;
+  width: auto;
+  max-width: 100%;
+}
+
+.btnCta:hover {
+  background: #00ffaa;
+  transform: translateY(-3px);
+  box-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+}
+
+.ctaNote {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 12px;
+  position: relative;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .cta {
+    padding: 180px 24px;
+  }
+  .glow {
+    width: 800px;
+    height: 600px;
+  }
+  .container {
+    max-width: 1100px;
+  }
+  .ctaH2 {
+    font-size: clamp(40px, 6vw, 76px);
+    max-width: 800px;
+    margin-bottom: 24px;
+  }
+  .ctaSub {
+    font-size: 16px;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+  .btnCta {
+    padding: 18px 40px;
+    font-size: 16px;
+    box-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+  }
+  .ctaNote {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+}
+
+/* 4K */
+@media (min-width: 2560px) {
+  .cta {
+    padding: 240px 40px;
+  }
+  .glow {
+    width: 1200px;
+    height: 800px;
+  }
+  .ctaH2 {
+    font-size: 100px;
+    max-width: 1200px;
+  }
+  .ctaSub {
+    font-size: 22px;
+    max-width: 600px;
+  }
+  .btnCta {
+    padding: 24px 60px;
+    font-size: 20px;
+  }
+  .ctaNote {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,52 @@
+.metrics {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  position: relative;
+  width: 100%;
+}
+
+.metricVal {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.metricLbl {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .metrics {
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+  .metricVal {
+    font-size: 28px;
+  }
+  .metricLbl {
+    font-size: 11px;
+  }
+}
+
+/* 4K */
+@media (min-width: 2560px) {
+  .metrics {
+    gap: 80px;
+  }
+  .metricVal {
+    font-size: 40px;
+  }
+  .metricLbl {
+    font-size: 14px;
+  }
+}

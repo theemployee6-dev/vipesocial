@@ -1,0 +1,379 @@
+.section {
+  padding: 80px 16px;
+  position: relative;
+  background: var(--bg2);
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.secCenter {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.secLabel {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.secH2 {
+  font-size: clamp(28px, 8vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+
+.secH2 .ac {
+  color: var(--green);
+}
+
+.secSub {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 100%;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+.recursosGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .section {
+    padding: 140px 24px;
+  }
+  .container {
+    max-width: 1100px;
+  }
+  .secCenter {
+    margin-bottom: 80px;
+  }
+  .secLabel {
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .secH2 {
+    font-size: clamp(32px, 5vw, 60px);
+    max-width: 700px;
+  }
+  .secSub {
+    font-size: 16px;
+    max-width: 480px;
+  }
+  .recursosGrid {
+    gap: 120px;
+  }
+}
+
+/* 4K */
+@media (min-width: 2560px) {
+  .section {
+    padding: 200px 40px;
+  }
+  .container {
+    max-width: 1600px;
+  }
+  .secLabel {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  .secH2 {
+    font-size: 70px;
+    max-width: 1000px;
+  }
+  .secSub {
+    font-size: 22px;
+    max-width: 700px;
+  }
+  .recursosGrid {
+    gap: 180px;
+  }
+}
+
+/* Estilos compartilhados usados nos visuais (mantidos iguais, mas com ajustes de tamanho) */
+.hookCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.hookLbl {
+  font-size: 8px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.hookVal {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.ibars {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.ibar {
+  height: 4px;
+  flex: 1;
+  border-radius: 2px;
+}
+.ibarLabel {
+  text-align: right;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+.hookGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.hookDesc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+}
+.dnaMain {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.08),
+    rgba(0, 255, 136, 0.03)
+  );
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.dcLbl {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.dcLbl.g {
+  color: var(--green);
+}
+.dnaEmocao {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--green);
+  margin: 4px 0 8px;
+}
+.dnaDesc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.dnaChips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.chip {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.chipG {
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+}
+.chipB {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.chipP {
+  background: rgba(167, 139, 250, 0.1);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+.formula {
+  font-size: 10px;
+  color: var(--green);
+  font-style: italic;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.rotCard {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.rotHeader {
+  background: rgba(0, 255, 136, 0.04);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rotTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+}
+.rotMeta {
+  font-size: 9px;
+  color: var(--text-dim);
+}
+.rotSeg {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.rotTime {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--green);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+.rotTime.highlight {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+}
+.rotFala {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+  line-height: 1.4;
+  border-left: 2px solid rgba(0, 255, 136, 0.3);
+  padding-left: 8px;
+  margin-bottom: 4px;
+}
+.rotFala.highlightFala {
+  border-left-color: rgba(248, 113, 113, 0.4);
+  color: #fca5a5;
+}
+.rotDetails {
+  display: flex;
+  gap: 8px;
+}
+.rotDetail {
+  font-size: 8px;
+  color: var(--text-dim);
+}
+
+/* Tablet ajustes para os visuais */
+@media (min-width: 768px) {
+  .hookVal {
+    font-size: 14px;
+  }
+  .hookGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dnaEmocao {
+    font-size: 22px;
+  }
+  .dnaDesc {
+    font-size: 11px;
+  }
+  .chip {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+  .formula {
+    font-size: 11px;
+  }
+  .rotTitle {
+    font-size: 13px;
+  }
+  .rotMeta {
+    font-size: 10px;
+  }
+  .rotTime {
+    font-size: 9px;
+  }
+  .rotFala {
+    font-size: 11px;
+  }
+  .rotDetail {
+    font-size: 9px;
+  }
+}
+
+/* 4K ajustes */
+@media (min-width: 2560px) {
+  .hookCard {
+    padding: 14px;
+  }
+  .hookLbl {
+    font-size: 11px;
+  }
+  .hookVal {
+    font-size: 16px;
+  }
+  .ibar {
+    height: 6px;
+  }
+  .hookDesc {
+    font-size: 12px;
+  }
+  .dnaMain {
+    padding: 16px;
+  }
+  .dcLbl {
+    font-size: 12px;
+  }
+  .dnaEmocao {
+    font-size: 26px;
+  }
+  .dnaDesc {
+    font-size: 14px;
+  }
+  .chip {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+  .formula {
+    font-size: 15px;
+  }
+  .rotHeader {
+    padding: 16px 24px;
+  }
+  .rotTitle {
+    font-size: 16px;
+  }
+  .rotMeta {
+    font-size: 12px;
+  }
+  .rotTime {
+    font-size: 11px;
+  }
+  .rotFala {
+    font-size: 14px;
+  }
+  .rotDetail {
+    font-size: 11px;
+  }
+}

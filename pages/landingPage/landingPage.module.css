@@ -1,0 +1,30 @@
+.root {
+  background: var(--bg);
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+}
+
+/* Container principal para telas grandes - aplicado via classe no componente ou diretamente no root */
+@media (min-width: 2560px) {
+  .root {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+:root {
+  --green: #00ff88;
+  --green-dim: #00cc66;
+  --green-ghost: rgba(0, 255, 136, 0.07);
+  --green-glow: rgba(0, 255, 136, 0.18);
+  --bg: #04070e;
+  --bg2: #060a12;
+  --bg3: #080d16;
+  --card: #0b1020;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-green: rgba(0, 255, 136, 0.2);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --text-dim: rgba(255, 255, 255, 0.25);
+}

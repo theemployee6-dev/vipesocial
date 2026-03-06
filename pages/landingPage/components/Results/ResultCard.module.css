@@ -1,0 +1,276 @@
+.rc {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.rc.span2 {
+  grid-column: span 1; /* no mobile ocupa 1 coluna */
+}
+
+.rc.ac {
+  border-color: rgba(0, 255, 136, 0.2);
+  background: rgba(0, 255, 136, 0.04);
+}
+
+.rc.warn {
+  border-color: rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.04);
+}
+
+.rcLbl {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.rcLbl.g {
+  color: var(--green);
+}
+
+.rcLbl.y {
+  color: #f59e0b;
+}
+
+.rcBig {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.rcSub {
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.rcProg {
+  margin-top: 12px;
+}
+
+.rcProgRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.rcProgLbl {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.rcProgVal {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.rcBarWrap {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rcBar {
+  height: 100%;
+  background: linear-gradient(90deg, #009944, #00ff88);
+  border-radius: 2px;
+}
+
+.dcTags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.dcTag {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 16px;
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.dcTag.b {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.rcDnaTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.rcDnaText {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.dnaChips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.chip {
+  font-size: 8px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.chipG {
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+}
+
+.chipB {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.rcFormula {
+  font-size: 10px;
+  color: var(--green);
+  font-style: italic;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.dcCadeia {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.cadItem {
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.cadLbl {
+  font-size: 7px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.cadVal {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.warnText {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .rc {
+    padding: 18px;
+  }
+  .rc.span2 {
+    grid-column: span 2;
+  }
+  .rcLbl {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .rcBig {
+    font-size: 52px;
+  }
+  .rcSub {
+    font-size: 10px;
+  }
+  .rcProgLbl {
+    font-size: 10px;
+  }
+  .rcProgVal {
+    font-size: 10px;
+  }
+  .dcTag {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+  .rcDnaTitle {
+    font-size: 18px;
+  }
+  .rcDnaText {
+    font-size: 11px;
+  }
+  .chip {
+    font-size: 9px;
+    padding: 3px 10px;
+  }
+  .rcFormula {
+    font-size: 11px;
+  }
+  .dcCadeia {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .cadLbl {
+    font-size: 7px;
+  }
+  .cadVal {
+    font-size: 9px;
+  }
+  .warnText {
+    font-size: 11px;
+  }
+}
+
+/* 4K */
+@media (min-width: 2560px) {
+  .rc {
+    padding: 24px;
+  }
+  .rcLbl {
+    font-size: 12px;
+  }
+  .rcBig {
+    font-size: 64px;
+  }
+  .rcSub {
+    font-size: 12px;
+  }
+  .rcProgLbl {
+    font-size: 12px;
+  }
+  .rcProgVal {
+    font-size: 12px;
+  }
+  .rcDnaTitle {
+    font-size: 22px;
+  }
+  .rcDnaText {
+    font-size: 14px;
+  }
+  .rcFormula {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,220 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 16px 60px; /* mobile */
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px; /* menor no mobile */
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  pointer-events: none;
+}
+
+.heroGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 100%;
+  max-width: 600px; /* escala */
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 136, 0.12) 0%,
+    rgba(0, 255, 136, 0.04) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.heroRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 136, 0.08);
+  pointer-events: none;
+  width: 400px;
+  height: 400px;
+}
+.heroRing:last-of-type {
+  width: 280px;
+  height: 280px;
+}
+
+.heroH1 {
+  font-size: clamp(36px, 10vw, 60px); /* mobile first */
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  max-width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.heroH1 .ac {
+  color: var(--green);
+}
+
+.heroH1 .ac2 {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 255, 136, 0.5);
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 100%;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  position: relative;
+  padding: 0 10px;
+}
+
+.heroSub strong {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+.heroH1,
+.heroSub,
+.heroCtas {
+  text-align: center; /* reforço */
+  width: 100%;
+  max-width: 100%; /* para não esticar além do necessário */
+}
+
+.heroCtas {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.btnPrimary,
+.btnSecondary {
+  padding: 10px 20px; /* reduzido */
+  font-size: 13px;
+  border-radius: 100px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+  flex: 0 1 auto; /* não estica mais */
+  max-width: 180px; /* limite para não ficarem enormes */
+  border: none;
+}
+
+.btnPrimary {
+  background: var(--green);
+  color: #04070e;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+}
+
+.btnSecondary:hover {
+  border-color: var(--border-green);
+  color: var(--green);
+}
+
+.btnSecondary:hover {
+  border-color: var(--border-green);
+  color: var(--green);
+}
+
+.dashWrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .hero {
+    padding: 120px 24px 80px;
+  }
+  .heroGrid {
+    background-size: 60px 60px;
+  }
+  .heroGlow {
+    width: 900px;
+    height: 900px;
+  }
+  .heroRing {
+    width: 600px;
+    height: 600px;
+  }
+  .heroRing:last-of-type {
+    width: 400px;
+    height: 400px;
+  }
+  .heroH1 {
+    font-size: clamp(44px, 7vw, 88px);
+    max-width: 900px;
+    margin-bottom: 28px;
+  }
+  .heroSub {
+    font-size: 17px;
+    max-width: 480px;
+    margin-bottom: 44px;
+  }
+  .heroCtas {
+    margin-bottom: 60px;
+  }
+  .btnPrimary,
+  .btnSecondary {
+    padding: 12px 24px;
+    font-size: 14px;
+    max-width: 200px;
+  }
+  .dashWrap {
+    max-width: 960px;
+  }
+}
+
+/* 4K */
+@media (min-width: 2560px) {
+  .hero {
+    padding: 160px 40px 120px;
+  }
+  .heroH1 {
+    font-size: 120px;
+    max-width: 1200px;
+    margin-bottom: 40px;
+  }
+  .heroSub {
+    font-size: 24px;
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+  .heroCtas {
+    gap: 20px;
+  }
+  .btnPrimary,
+  .btnSecondary {
+    padding: 16px 32px;
+    font-size: 16px;
+    max-width: 240px;
+  }
+  .dashWrap {
+    max-width: 1400px;
+  }
+}
