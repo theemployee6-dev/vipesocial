@@ -11,6 +11,7 @@
   "dependencies": {
     "@google/genai": "^1.43.0",
     "@openrouter/sdk": "^0.9.11",
+    "@phosphor-icons/react": "^2.1.10",
     "@supabase/supabase-js": "^2.95.3",
     "animejs": "^4.3.6",
     "jsonrepair": "^3.13.2",

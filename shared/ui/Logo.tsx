@@ -2,14 +2,14 @@ import Image from "next/image";
 
 const Logo = () => {
   return (
-    <div className="relative w-[100] sm:w-[120] md:w-[140] lg:w-[160] xl:w-[180] 2xl:w-[200] 4k:w-[240] h-auto aspect-50/20">
+    <div className="relative w-[250] sm:w-[280] md:w-[320] lg:w-[360] xl:w-[400] 2xl:w-[440] 4k:w-[500] aspect-7/2">
       <Image
         src="/assets/img/logo/logo_transparent.png"
         alt="logo-image"
         fill
-        sizes="(max-width: 640) 100, (max-width: 768px) 120px, (max-width: 1024px) 140px, (max-width: 1280px) 160px, (max-width: 1536px) 180px, (max-width: 2560px) 200px, 240px"
+        sizes="(min-width: 2560px) 500px, (min-width: 1536px) 440px, (min-width: 1280px) 400px, (min-width: 1024px) 360px, (min-width: 768px) 320px, (min-width: 640px) 280px, 250px"
         className="object-contain"
-        priority // opcional, se for uma imagem importante
+        priority
         quality={85}
       />
     </div>
