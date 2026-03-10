@@ -27,7 +27,7 @@ const ResultsSection = () => {
                 <div className={`${styles.dashTab} ${styles.active}`}>
                   🔥 Por que Viralizou?
                 </div>
-                <div className={styles.dashTab}>💡 O que Gravar</div>
+                <div className={styles.dashTab}>💡 O que Gravar?</div>
                 <div className={styles.dashTab}>📅 Calendário</div>
               </div>
               <div className={styles.dashBtnSm}>← Nova análise</div>

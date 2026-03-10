@@ -16,16 +16,13 @@ import {
   CircleNotchIcon,
   ArrowRightIcon,
 } from "@phosphor-icons/react";
-import {
-  inputClass,
-  labelClass,
-  selectClass,
-} from "./components/ui/formClasses";
+import { inputClass, labelClass, selectClass } from "./styles/formClasses";
 import { socialMedias } from "./utils/socialStringAndIcons";
 import SectionDivider from "./components/ui/SectionDivider";
 import { accountTypeStringAndIcons } from "./utils/accountTypeStringAndIcons";
 import GlowBackground from "../../../shared/ui/GlowBackground";
 import Link from "next/link";
+import TopAccentLine from "./components/ui/TopAccentLine";
 
 function Field({
   label,
@@ -53,7 +50,7 @@ export default function RegisterPage() {
     if (file) setPreview(URL.createObjectURL(file));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => setLoading(false), 2000);
@@ -63,10 +60,10 @@ export default function RegisterPage() {
     <main className="min-h-screen bg-[#020617] flex items-center justify-center px-4 py-10 relative overflow-hidden">
       {/* Glow background */}
       <GlowBackground />
-      {/* Card */}
+      {/* Wrapper */}
       <div className="relative w-full max-w-2xl">
         {/* Top accent line */}
-        <div className="h-[2] w-full bg-linear-to-r from-transparent via-emerald-400 to-transparent opacity-60" />
+        <TopAccentLine />
 
         <div className="px-8 pt-8 pb-10">
           {/* Header */}
@@ -211,13 +208,7 @@ export default function RegisterPage() {
             </div>
 
             {/* Section divider */}
-            <div className="flex items-center gap-3 pt-2 fade-up delay-6">
-              <div className="flex-1 h-px bg-slate-700" />
-              <span className="text-slate-500 text-[10px] tracking-widest uppercase">
-                Perfil público
-              </span>
-              <div className="flex-1 h-px bg-slate-700" />
-            </div>
+            <SectionDivider title="Perfil público" />
 
             {/* Foto de perfil */}
             <div className="fade-up delay-6">
@@ -401,7 +392,7 @@ export default function RegisterPage() {
                     Criando conta...
                   </span>
                 ) : (
-                  <span className="flex items-center justify-center gap-2 syne tracking-wide">
+                  <span className="flex items-center justify-center gap-2 Poppins tracking-wide">
                     Criar conta
                     <ArrowRightIcon
                       size={14}

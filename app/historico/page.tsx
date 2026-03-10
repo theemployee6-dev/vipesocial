@@ -62,22 +62,24 @@ export default function HistoricoPage() {
     >
       {/* Topbar */}
       <div
-        className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b sticky top-0 z-20"
+        className="flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 4k:px-16 py-3 border-b sticky top-0 z-20"
         style={{
           background: "rgba(5,8,15,0.88)",
           backdropFilter: "blur(16px)",
           borderColor: "rgba(255,255,255,0.08)",
         }}
       >
-        <div className="flex items-center gap-2.5">
-          <Logo />
-        </div>
-        <h1 className="text-sm font-bold text-white/70">
+        <Link href={"/"}>
+          <div className="w-[100] sm:w-[120] md:w-[140] lg:w-[160] xl:w-[180] 2xl:w-[200] 4k:w-[240] h-auto">
+            <Logo />
+          </div>
+        </Link>
+        <h1 className="text-sm md:text-base font-bold text-white/70">
           Histórico de Análises
         </h1>
         <Link
           href="/"
-          className="text-xs px-3 py-1.5 rounded-lg font-semibold"
+          className="text-xs px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-semibold"
           style={{
             background: "rgba(0,255,136,0.08)",
             border: "1px solid rgba(0,255,136,0.2)",
@@ -89,11 +91,11 @@ export default function HistoricoPage() {
       </div>
 
       {/* Conteúdo */}
-      <div className="max-w-5xl 4k:max-w-screen-2xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-5xl 4k:max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 4k:px-16 py-8">
         {loading && (
           <div className="flex items-center justify-center py-24">
             <div
-              className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-t-transparent animate-spin"
               style={{ borderColor: "#00ff88", borderTopColor: "transparent" }}
             />
           </div>
@@ -101,26 +103,26 @@ export default function HistoricoPage() {
 
         {!loading && analises.length === 0 && (
           <div className="text-center py-24 text-white/30">
-            <p className="text-4xl mb-4">📭</p>
-            <p className="text-sm">Nenhuma análise encontrada.</p>
+            <p className="text-4xl md:text-5xl mb-4">📭</p>
+            <p className="text-sm md:text-base">Nenhuma análise encontrada.</p>
           </div>
         )}
 
         {!loading && analises.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
             {analises.map((analise) => (
               <button
                 key={analise.id}
                 onClick={() => setSelecionada(analise)}
                 disabled={!analise.resultado_completo}
-                className="text-left rounded-xl p-4 transition-all hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="text-left rounded-xl p-4 md:p-5 transition-all hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{
                   background: "linear-gradient(135deg, #0d1117, #111827)",
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {/* Data */}
-                <p className="text-[10px] text-white/30 mb-3">
+                <p className="text-[10px] md:text-xs text-white/30 mb-3">
                   {formatData(analise.criado_em)}
                 </p>
 
@@ -131,7 +133,7 @@ export default function HistoricoPage() {
 
                 {/* Nicho */}
                 <span
-                  className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold mb-3"
+                  className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] md:text-xs font-bold mb-3"
                   style={{
                     background: "rgba(0,255,136,0.1)",
                     color: "#00ff88",
@@ -143,14 +145,14 @@ export default function HistoricoPage() {
 
                 {/* Emoção central */}
                 <p
-                  className="font-black text-base leading-snug mb-2"
+                  className="font-black text-base md:text-lg leading-snug mb-2"
                   style={{ color: "#00ff88" }}
                 >
                   {analise.emocao_central}
                 </p>
 
                 {/* Fórmula */}
-                <p className="text-xs text-white/40 leading-relaxed line-clamp-3">
+                <p className="text-xs md:text-sm text-white/40 leading-relaxed line-clamp-3">
                   {analise.formula_emocional}
                 </p>
 
@@ -159,18 +161,18 @@ export default function HistoricoPage() {
                   className="flex items-center justify-between mt-4 pt-3"
                   style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
                 >
-                  <span className="text-[10px] text-white/25 truncate max-w-[160]">
+                  <span className="text-[10px] md:text-xs text-white/25 truncate max-w-[160] md:max-w-[200]">
                     {analise.video_url.split("/").pop()}
                   </span>
                   {analise.resultado_completo ? (
                     <span
-                      className="text-[10px] font-bold"
+                      className="text-[10px] md:text-xs font-bold"
                       style={{ color: "#00ff88" }}
                     >
                       Ver análise →
                     </span>
                   ) : (
-                    <span className="text-[10px] text-white/25">
+                    <span className="text-[10px] md:text-xs text-white/25">
                       Indisponível
                     </span>
                   )}

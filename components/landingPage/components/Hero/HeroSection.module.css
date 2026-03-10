@@ -105,7 +105,7 @@
 }
 .btnPrimary,
 .btnSecondary {
-  padding: 10px 20px; /* reduzido */
+  padding: 10px 10px; /* reduzido */
   font-size: 13px;
   border-radius: 100px;
   font-weight: 700;
@@ -181,7 +181,7 @@
   }
   .btnPrimary,
   .btnSecondary {
-    padding: 12px 24px;
+    padding: 12px 12px;
     font-size: 14px;
     max-width: 200px;
   }
