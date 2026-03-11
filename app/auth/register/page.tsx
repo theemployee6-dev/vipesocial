@@ -259,14 +259,13 @@ import GlowBackground from "@/shared/ui/GlowBackground";
 import NeonAccentLine from "./components/ui/TopAccentLine";
 import Header from "./components/Header/Header";
 import SectionDivider from "./components/ui/SectionDivider";
-import Link from "next/link";
+
 import {
-  ArrowRightIcon,
   AtIcon,
   CalendarIcon,
   CaretDownIcon,
-  CircleNotchIcon,
   EnvelopeIcon,
+  HashIcon,
   HeartIcon,
   MapPinIcon,
   PhoneIcon,
@@ -279,6 +278,8 @@ import { socialMedias } from "./utils/socialStringAndIcons";
 import { labelClass } from "./styles/formClasses";
 import AccountTypePicker from "./components/AccountTypePicker/AccountTypePicker";
 import TermsCheckbox from "./components/TermsCheckbox/TermsCheckbox";
+import SubmitButton from "./components/SubmitButton/SubmitButton";
+import LoginPrompt from "./components/LoginPrompt/LoginPrompt";
 
 const RegisterPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -336,6 +337,22 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="username"
                 icon={<AtIcon size={20} />}
+              />
+            </section>
+
+            {/* Idade + Cidade */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 ...">
+              <FieldInput
+                label="Idade"
+                type="number"
+                placeholder="18"
+                icon={<HashIcon size={20} />}
+              />
+              <FieldInput
+                label="Cidade"
+                type="text"
+                placeholder="São Paulo"
+                icon={<MapPinIcon size={20} />}
               />
             </section>
 
@@ -459,45 +476,14 @@ const RegisterPage = () => {
 
             {/* Botão de submit e link login */}
             <div className="relative flex flex-col items-center fade-up delay-11">
-              <button
-                type="submit"
-                disabled={loading}
-                className="relative w-full sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[45%] 4k:w-[40%] py-3 sm:py-3.5 md:py-4 lg:py-4.5 xl:py-5 2xl:py-6 4k:py-8 rounded-xl font-bold text-sm sm:text-base md:text-lg lg:text-xl text-[#020617] overflow-hidden group transition-all duration-300 disabled:opacity-70 mt-2"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-                }}
-              >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <CircleNotchIcon
-                      size={16}
-                      className="animate-spin"
-                      weight="bold"
-                    />
-                    Criando conta...
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2 Poppins tracking-wide">
-                    Criar conta
-                    <ArrowRightIcon
-                      size={14}
-                      weight="bold"
-                      color="currentColor"
-                    />
-                  </span>
-                )}
-              </button>
+              <section className="w-full lg:w-[70%] xl:w-[65%] 2xl:w-[60%] 4k:w-[50%]">
+                <SubmitButton title="Criar conta" size="full" />
+              </section>
 
-              <p className="text-center text-xs sm:text-sm md:text-base text-slate-400 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8 2xl:mt-9 4k:mt-10">
-                Já tem uma conta?{" "}
-                <Link href={"/auth/login"}>
-                  <span className="text-emerald-400 font-semibold hover:underline cursor-pointer">
-                    Entrar agora
-                  </span>
-                </Link>
-              </p>
+              {/* Login Prompt */}
+              <section>
+                <LoginPrompt href="/auth/login" linkText="Entrar agora" />
+              </section>
             </div>
           </form>
         </section>

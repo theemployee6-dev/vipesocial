@@ -3,8 +3,8 @@ export const inputClass = `
   w-full 
   px-4 py-2.5
   sm:px-5 sm:py-3
-  lg:px-6 lg:py-3
-  xl:px-10 xl:py-3.5
+  lg:px-10 lg:py-3
+  xl:px-10 xl:py-3
   2xl:px-10 2xl:py-4
 
   rounded-xl
@@ -26,7 +26,7 @@ export const selectClass = `
   w-full 
   px-3 py-2.5
   sm:px-4 sm:py-3
-  lg:px-5 lg:py-3
+  lg:px-5 lg:py-2.5
   xl:px-6 xl:py-3.5
   2xl:px-8 2xl:py-4
 
