@@ -1,381 +1,468 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// "use client";
+
+// import { useState } from "react";
+// import Header from "./components/Header/Header";
+// import {
+//   EnvelopeIcon,
+//   MapPinIcon,
+//   PhoneIcon,
+//   HeartIcon,
+//   CircleNotchIcon,
+//   ArrowRightIcon,
+//   UserIcon,
+//   AtIcon,
+//   CalendarIcon,
+//   CaretDownIcon,
+// } from "@phosphor-icons/react";
+// import { labelClass } from "./styles/formClasses";
+// import { socialMedias } from "./utils/socialStringAndIcons";
+// import SectionDivider from "./components/ui/SectionDivider";
+
+// import GlowBackground from "../../../shared/ui/GlowBackground";
+// import Link from "next/link";
+// import NeonAccentLine from "./components/ui/TopAccentLine";
+// import FieldInput from "./components/Field/Field";
+// import { fieldInputGeneroSelectOptions } from "./components/Field/constants/fieldInputGeneroSelectOptions";
+// import ImageUpload from "./components/ImageUpload/ImageUpload";
+// import AccountTypePicker from "./components/AccountTypePicker/AccountTypePicker";
+// import TermsCheckbox from "./components/TermsCheckbox/TermsCheckbox";
+
+// export default function RegisterPage() {
+//   const [accountType, setAccountType] = useState("pessoal");
+//   const [loading, setLoading] = useState(false);
+//   const [agreed, setAgreed] = useState(false);
+//   const [avatar, setAvatar] = useState<File | null>(null);
+
+//   const handleSubmit = (e: React.SubmitEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     console.log(avatar); // arquivo de imagem pronto para enviar
+//     setTimeout(() => setLoading(false), 2000);
+//   };
+
+//   return (
+//     <main className="min-h-screen bg-[#020617] px-4 sm:px-[22.5%] py-10 relative overflow-hidden">
+//       {/* Glow background */}
+//       <GlowBackground />
+//       {/* Wrapper */}
+//       <div className="relative w-full max-w-full lg:max-w-[1400] xl:max-w-[1400] px-12 mx-auto">
+//         {/* Top accent line */}
+//         <NeonAccentLine />
+
+//         <div className="px-8 sm:px-10 lg:px-12 pt-8 pb-10">
+//           {/* Header */}
+//           <Header
+//             firstSmallTitle="Nova Conta"
+//             secondBigTitleWhite="Comece a "
+//             secondBigTitleGreen="Viralizar"
+//             subTitle="Preencha dos dados abaixo para criar sua conta."
+//           />
+
+//           {/* Divider */}
+//           <SectionDivider title="Informações pessoais" />
+
+//           <form onSubmit={handleSubmit} className="space-y-5">
+//             {/* Nome + Username */}
+//             <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up delay-2">
+//               {/* <Field label="Nome completo">*/}
+
+//               <FieldInput
+//                 label="Nome Completo"
+//                 type="text"
+//                 placeholder="João Silva"
+//                 icon={<UserIcon size={20} />}
+//               />
+//               <FieldInput
+//                 label="Nome de usuário"
+//                 type="text"
+//                 placeholder="username"
+//                 icon={<AtIcon size={20} />}
+//               />
+//             </section>
+
+//             {/* Email */}
+//             <section className="fade-up delay-3">
+//               {/*  <Field label="E-mail"> */}
+//               <FieldInput
+//                 label="E-Mail"
+//                 type="email"
+//                 placeholder="seu@email.com"
+//                 icon={<EnvelopeIcon size={18} />}
+//               />
+//             </section>
+
+//             {/* Password Senha */}
+//             <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up delay-4">
+//               {/* <Field label="Senha"> */}
+//               <FieldInput
+//                 label="Senha"
+//                 type="password"
+//                 placeholder="••••••••"
+//               />
+
+//               {/* Password Confirmar Senha */}
+//               <FieldInput
+//                 label="Confirmar Senha"
+//                 type="password"
+//                 placeholder="••••••••"
+//               />
+//             </section>
+
+//             {/* Nascimento + Gênero */}
+//             <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up delay-5">
+//               {/* <Field label="Data de nascimento"> */}
+//               <FieldInput
+//                 label="Data de nascimento"
+//                 type="date"
+//                 icon={<CalendarIcon size={20} />}
+//                 iconPosition="right"
+//                 placeholder="dd/mm/aa"
+//               />
+//               <FieldInput
+//                 label="Gênero"
+//                 type="select"
+//                 icon={<CaretDownIcon size={20} />}
+//                 iconPosition="right"
+//                 options={fieldInputGeneroSelectOptions}
+//               />
+//             </section>
+
+//             {/* País + Contato */}
+//             <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up delay-5">
+//               {/* <Field label="País / Localização"> */}
+//               <FieldInput
+//                 label="País / Localização"
+//                 type="text"
+//                 placeholder="Brasil"
+//                 icon={<MapPinIcon size={20} />}
+//               />
+//               {/* <Field label="Contato"> */}
+//               <FieldInput
+//                 label="Contato"
+//                 type="tel"
+//                 placeholder="+55 (11) 99999-9999"
+//                 icon={<PhoneIcon size={20} />}
+//               />
+//             </section>
+
+//             {/* Section divider */}
+//             <SectionDivider title="Perfil público" />
+
+//             {/* Foto de perfil */}
+//             <section className="flex flex-col sm:flex-row gap-4 fade-up delay-6">
+//               <div className="shrink-0">
+//                 <ImageUpload onChange={(file) => setAvatar(file)} />
+//               </div>
+//               {/* Bio */}
+//               <section className="flex-1 fade-up delay-7">
+//                 <FieldInput
+//                   label="Biografia"
+//                   type="textarea"
+//                   placeholder="Conte um pouco sobre você, seu conteúdo e nicho..."
+//                 />
+//               </section>
+//             </section>
+
+//             {/* Redes Sociais */}
+//             <section className="fade-up delay-7">
+//               <label className={labelClass}>Redes sociais</label>
+//               <section className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+//                 {socialMedias.map(({ label, icon: Icon }) => (
+//                   <FieldInput
+//                     key={label}
+//                     icon={<Icon size={13} weight="fill" />}
+//                     placeholder={label}
+//                   />
+//                 ))}
+//               </section>
+//             </section>
+
+//             {/* Interesses */}
+//             <section className="fade-up delay-8">
+//               {/* <Field label="Interesses / categorias"> */}
+//               <FieldInput
+//                 label="Interesses / Categorias"
+//                 placeholder="ex: tecnologia, humor, lifestyle, finanças..."
+//                 icon={<HeartIcon size={20} />}
+//               />
+//             </section>
+
+//             {/* Section divider */}
+//             <SectionDivider title="Tipo de conta" />
+
+//             {/* Tipo de conta */}
+//             <section className="grid grid-cols-3 gap-3">
+//               <AccountTypePicker
+//                 value={accountType}
+//                 onChange={setAccountType}
+//               />
+//             </section>
+
+//             {/* Termos */}
+//             <label className="flex items-start gap-3 cursor-pointer group fade-up delay-10">
+//               <TermsCheckbox value={agreed} onChange={setAgreed} />
+//             </label>
+
+//             {/* Submit */}
+//             <div className="fade-up delay-11">
+//               <button
+//                 type="submit"
+//                 disabled={loading}
+//                 className="relative w-full py-3.5 rounded-xl font-bold text-sm text-[#020617] overflow-hidden group transition-all duration-300 disabled:opacity-70 mt-2"
+//                 style={{
+//                   background:
+//                     "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+//                 }}
+//               >
+//                 <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+//                 {loading ? (
+//                   <span className="flex items-center justify-center gap-2">
+//                     <CircleNotchIcon
+//                       size={16}
+//                       className="animate-spin"
+//                       weight="bold"
+//                     />
+//                     Criando conta...
+//                   </span>
+//                 ) : (
+//                   <span className="flex items-center justify-center gap-2 Poppins tracking-wide">
+//                     Criar conta
+//                     <ArrowRightIcon
+//                       size={14}
+//                       weight="bold"
+//                       color="currentColor"
+//                     />
+//                   </span>
+//                 )}
+//               </button>
+
+//               <p className="text-center text-sm text-slate-400 mt-5">
+//                 Já tem uma conta?{" "}
+//                 <Link href={"/auth/login"}>
+//                   <span className="text-emerald-400 font-semibold hover:underline cursor-pointer">
+//                     Entrar agora
+//                   </span>
+//                 </Link>
+//               </p>
+//             </div>
+//           </form>
+//         </div>
+//         <NeonAccentLine />
+//       </div>
+//     </main>
+//   );
+// }
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import GlowBackground from "@/shared/ui/GlowBackground";
+import NeonAccentLine from "./components/ui/TopAccentLine";
 import Header from "./components/Header/Header";
+import SectionDivider from "./components/ui/SectionDivider";
+import Link from "next/link";
 import {
-  EnvelopeIcon,
-  LockIcon,
+  ArrowRightIcon,
+  AtIcon,
+  CalendarIcon,
   CaretDownIcon,
+  CircleNotchIcon,
+  EnvelopeIcon,
+  HeartIcon,
   MapPinIcon,
   PhoneIcon,
-  UploadIcon,
-  HeartIcon,
-  CheckIcon,
-  CircleNotchIcon,
-  ArrowRightIcon,
+  UserIcon,
 } from "@phosphor-icons/react";
-import { inputClass, labelClass, selectClass } from "./styles/formClasses";
+import FieldInput from "./components/Field/Field";
+import { fieldInputGeneroSelectOptions } from "./components/Field/constants/fieldInputGeneroSelectOptions";
+import ImageUpload from "./components/ImageUpload/ImageUpload";
 import { socialMedias } from "./utils/socialStringAndIcons";
-import SectionDivider from "./components/ui/SectionDivider";
-import { accountTypeStringAndIcons } from "./utils/accountTypeStringAndIcons";
-import GlowBackground from "../../../shared/ui/GlowBackground";
-import Link from "next/link";
-import TopAccentLine from "./components/ui/TopAccentLine";
+import { labelClass } from "./styles/formClasses";
+import AccountTypePicker from "./components/AccountTypePicker/AccountTypePicker";
+import TermsCheckbox from "./components/TermsCheckbox/TermsCheckbox";
 
-function Field({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col">
-      <label className={labelClass}>{label}</label>
-      {children}
-    </div>
-  );
-}
-
-export default function RegisterPage() {
-  const [preview, setPreview] = useState<string | null>(null);
-  const [accountType, setAccountType] = useState("pessoal");
-  const [loading, setLoading] = useState(false);
-  const [agreed, setAgreed] = useState(false);
-
-  const handleImage = (e: any) => {
-    const file = e.target.files[0];
-    if (file) setPreview(URL.createObjectURL(file));
-  };
-
-  const handleSubmit = (e: React.SubmitEvent) => {
+const RegisterPage = () => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    console.log(avatar);
     setTimeout(() => setLoading(false), 2000);
   };
 
-  return (
-    <main className="min-h-screen bg-[#020617] flex items-center justify-center px-4 py-10 relative overflow-hidden">
-      {/* Glow background */}
-      <GlowBackground />
-      {/* Wrapper */}
-      <div className="relative w-full max-w-2xl">
-        {/* Top accent line */}
-        <TopAccentLine />
+  const [accountType, setAccountType] = useState("pessoal");
+  const [loading, setLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [avatar, setAvatar] = useState<File | null>(null);
 
-        <div className="px-8 pt-8 pb-10">
-          {/* Header */}
+  return (
+    <main className="relative w-screen h-screen bg-[#020617] p-5 sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[18%] 2xl:px-[22%] 4k:px-[25%] overflow-x-hidden">
+      <GlowBackground />
+      <div className="w-full h-auto">
+        {/* Linha neon superior */}
+        <section className="pt-3 pb-3 sm:pt-4 sm:pb-4 md:pt-5 md:pb-5 lg:pt-6 lg:pb-6 xl:pt-7 xl:pb-7 2xl:pt-8 2xl:pb-8 4k:pt-10 4k:pb-10">
+          <NeonAccentLine />
+        </section>
+
+        {/* Header */}
+        <section>
           <Header
             firstSmallTitle="Nova Conta"
             secondBigTitleWhite="Comece a "
             secondBigTitleGreen="Viralizar"
             subTitle="Preencha dos dados abaixo para criar sua conta."
           />
+        </section>
 
-          {/* Divider */}
+        {/* Divisor: Informações pessoais */}
+        <section className="pt-3 sm:pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 4k:pt-10">
           <SectionDivider title="Informações pessoais" />
+        </section>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Formulário */}
+        <section>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-7 xl:space-y-8 2xl:space-y-9 4k:space-y-10"
+          >
             {/* Nome + Username */}
-            <div className="grid grid-cols-2 gap-4 fade-up delay-2">
-              <Field label="Nome completo">
-                <input className={inputClass} placeholder="João Silva" />
-              </Field>
-              <Field label="Nome de usuário">
-                <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm">
-                    @
-                  </span>
-                  <input
-                    className={inputClass + " pl-7"}
-                    placeholder="joaosilva"
-                  />
-                </div>
-              </Field>
-            </div>
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-2">
+              <FieldInput
+                label="Nome Completo"
+                type="text"
+                placeholder="João Silva"
+                icon={<UserIcon size={20} />}
+              />
+              <FieldInput
+                label="Nome de usuário"
+                type="text"
+                placeholder="username"
+                icon={<AtIcon size={20} />}
+              />
+            </section>
 
             {/* Email */}
-            <div className="fade-up delay-3">
-              <Field label="E-mail">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    {/* email icon svg */}
-                    <EnvelopeIcon
-                      size={18}
-                      color="currentColor"
-                      weight="regular"
-                    />
-                  </div>
-                  <input
-                    className={inputClass + " pl-9"}
-                    placeholder="seu@email.com"
-                    type="email"
-                  />
-                </div>
-              </Field>
-            </div>
+            <section className="fade-up delay-3">
+              <FieldInput
+                label="E-Mail"
+                type="email"
+                placeholder="seu@email.com"
+                icon={<EnvelopeIcon size={18} />}
+              />
+            </section>
 
-            {/* Senha */}
-            <div className="grid grid-cols-2 gap-4 fade-up delay-4">
-              <Field label="Senha">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    {/* password icon */}
-                    <LockIcon size={18} color="currentColor" weight="regular" />
-                  </div>
-                  <input
-                    type="password"
-                    className={inputClass + " pl-9"}
-                    placeholder="••••••••"
-                  />
-                </div>
-              </Field>
-              <Field label="Confirmar senha">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    {/* confimation icon */}
-                    <LockIcon size={18} color="currentColor" weight="regular" />
-                  </div>
-                  <input
-                    type="password"
-                    className={inputClass + " pl-9"}
-                    placeholder="••••••••"
-                  />
-                </div>
-              </Field>
-            </div>
+            {/* Senha e Confirmar Senha */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-4">
+              <FieldInput
+                label="Senha"
+                type="password"
+                placeholder="••••••••"
+              />
+              <FieldInput
+                label="Confirmar Senha"
+                type="password"
+                placeholder="••••••••"
+              />
+            </section>
 
             {/* Nascimento + Gênero */}
-            <div className="grid grid-cols-2 gap-4 fade-up delay-5">
-              <Field label="Data de nascimento">
-                <input type="date" className={inputClass} />
-              </Field>
-              <Field label="Gênero">
-                <div className="relative">
-                  <select className={selectClass}>
-                    <option value="">Opcional</option>
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                    <option>Outro</option>
-                  </select>
-                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
-                    <CaretDownIcon
-                      size={18}
-                      color="currentColor"
-                      weight="regular"
-                    />
-                  </div>
-                </div>
-              </Field>
-            </div>
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
+              <FieldInput
+                label="Data de nascimento"
+                type="date"
+                icon={<CalendarIcon size={20} />}
+                iconPosition="right"
+                placeholder="dd/mm/aa"
+              />
+              <FieldInput
+                label="Gênero"
+                type="select"
+                icon={<CaretDownIcon size={20} />}
+                iconPosition="right"
+                options={fieldInputGeneroSelectOptions}
+              />
+            </section>
 
-            {/* País + Telefone */}
-            <div className="grid grid-cols-2 gap-4 fade-up delay-5">
-              <Field label="País / Localização">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    {/* map pin icon */}
-                    <MapPinIcon
-                      size={18}
-                      color="currentColor"
-                      weight="regular"
-                    />
-                  </div>
-                  <input
-                    className={inputClass + " pl-9"}
-                    placeholder="Brasil"
-                  />
-                </div>
-              </Field>
-              <Field label="Telefone (opcional)">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    {/* telephone icon */}
-                    <PhoneIcon
-                      size={18}
-                      color="currentColor"
-                      weight="regular"
-                    />
-                  </div>
-                  <input
-                    className={inputClass + " pl-9"}
-                    placeholder="+55 (11) 99999-9999"
-                  />
-                </div>
-              </Field>
-            </div>
+            {/* País + Contato */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
+              <FieldInput
+                label="País / Localização"
+                type="text"
+                placeholder="Brasil"
+                icon={<MapPinIcon size={20} />}
+              />
+              <FieldInput
+                label="Contato"
+                type="tel"
+                placeholder="+55 (11) 99999-9999"
+                icon={<PhoneIcon size={20} />}
+              />
+            </section>
 
-            {/* Section divider */}
-            <SectionDivider title="Perfil público" />
+            {/* Divisor: Perfil público */}
+            <section className="pt-3 sm:pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 4k:pt-10">
+              <SectionDivider title="Perfil público" />
+            </section>
 
-            {/* Foto de perfil */}
-            <div className="fade-up delay-6">
-              <label className={labelClass}>Foto de perfil (opcional)</label>
-              <div className="flex items-center gap-4">
-                <label className="relative cursor-pointer group">
-                  <div
-                    className={`w-16 h-16 rounded-2xl border-2 border-dashed border-slate-700 group-hover:border-emerald-400/40 transition-colors flex items-center justify-center overflow-hidden ${preview ? "border-solid border-emerald-400/40" : ""}`}
-                  >
-                    {preview ? (
-                      <Image
-                        src={preview}
-                        alt="preview"
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover rounded-2xl"
-                      />
-                    ) : (
-                      <UploadIcon
-                        size={18}
-                        color="currentColor"
-                        weight="regular"
-                      />
-                    )}
-                  </div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage}
-                    className="sr-only"
-                  />
-                </label>
-                <div>
-                  <p className="text-slate-400 text-xs">
-                    Clique para enviar uma imagem
-                  </p>
-                  <p className="text-slate-500 text-[10px] mt-0.5">
-                    PNG, JPG ou WEBP · Máx. 5MB
-                  </p>
-                </div>
+            {/* Foto de perfil + Bio */}
+            <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-6">
+              <div className="shrink-0 w-full sm:w-auto">
+                <ImageUpload onChange={(file) => setAvatar(file)} />
               </div>
-            </div>
-
-            {/* Bio */}
-            <div className="fade-up delay-7">
-              <Field label="Biografia">
-                <textarea
-                  className={inputClass + " h-24 resize-none leading-relaxed"}
+              <section className="flex-1 fade-up delay-7">
+                <FieldInput
+                  label="Biografia"
+                  type="textarea"
                   placeholder="Conte um pouco sobre você, seu conteúdo e nicho..."
                 />
-              </Field>
-            </div>
+              </section>
+            </section>
 
             {/* Redes Sociais */}
-            <div className="fade-up delay-7">
+            <section className="fade-up delay-7">
               <label className={labelClass}>Redes sociais</label>
-              <div className="grid grid-cols-3 gap-3">
+              <section className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-7 4k:gap-8">
                 {socialMedias.map(({ label, icon: Icon }) => (
-                  <div key={label} className="relative">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
-                      <Icon size={13} weight="fill" />
-                    </div>
-                    <input
-                      className={inputClass + " pl-8 text-xs"}
-                      placeholder={label}
-                    />
-                  </div>
+                  <FieldInput
+                    key={label}
+                    icon={<Icon size={13} weight="fill" />}
+                    placeholder={label}
+                  />
                 ))}
-              </div>
-            </div>
+              </section>
+            </section>
 
             {/* Interesses */}
-            <div className="fade-up delay-8">
-              <Field label="Interesses / categorias">
-                <div className="relative">
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">
-                    <HeartIcon
-                      size={14}
-                      color="currentColor"
-                      weight="regular"
-                    />
-                  </div>
-                  <input
-                    className={inputClass + " pl-9"}
-                    placeholder="ex: tecnologia, humor, lifestyle, finanças..."
-                  />
-                </div>
-              </Field>
-            </div>
+            <section className="fade-up delay-8">
+              <FieldInput
+                label="Interesses / Categorias"
+                placeholder="ex: tecnologia, humor, lifestyle, finanças..."
+                icon={<HeartIcon size={20} />}
+              />
+            </section>
 
-            {/* Section divider */}
-            <SectionDivider title="Tipo de conta" />
+            {/* Divisor: Tipo de conta */}
+            <section className="pt-3 sm:pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 4k:pt-10">
+              <SectionDivider title="Tipo de conta" />
+            </section>
 
             {/* Tipo de conta */}
-            <div className="grid grid-cols-3 gap-3 fade-up delay-9">
-              {accountTypeStringAndIcons.map(({ value, label, desc, Icon }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => setAccountType(value)}
-                  className={`relative p-4 rounded-xl border text-left transition-all duration-200 ${
-                    accountType === value
-                      ? "border-emerald-400 bg-emerald-400/5 shadow-sm shadow-emerald-400/10"
-                      : "border-slate-700 bg-[#1e293b] hover:border-slate-500"
-                  }`}
-                >
-                  <Icon
-                    size={18}
-                    className={`mb-2 ${accountType === value ? "text-emerald-400" : "text-slate-500"}`}
-                    weight="regular"
-                  />
-                  <p
-                    className={`text-sm font-semibold ${accountType === value ? "text-emerald-400" : "text-white"}`}
-                  >
-                    {label}
-                  </p>
-                  <p className="text-[10px] text-slate-500 mt-0.5">{desc}</p>
-                  {accountType === value && (
-                    <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-emerald-400 flex items-center justify-center">
-                      <CheckIcon size={8} color="#020617" weight="bold" />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
+            <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10">
+              <AccountTypePicker
+                value={accountType}
+                onChange={setAccountType}
+              />
+            </section>
 
             {/* Termos */}
-            <label className="flex items-start gap-3 cursor-pointer group fade-up delay-10">
-              <div
-                className="relative mt-0.5 shrink-0"
-                onClick={() => setAgreed(!agreed)}
-              >
-                <div
-                  className={`w-5 h-5 rounded-md border transition-all ${
-                    agreed
-                      ? "bg-emerald-400 border-emerald-400"
-                      : "bg-[#1e293b] border-slate-700 group-hover:border-slate-500"
-                  }`}
-                >
-                  {agreed && (
-                    <CheckIcon
-                      weight="bold"
-                      color="#020617"
-                      className="w-full h-full p-0.5"
-                    />
-                  )}
-                </div>
-              </div>
-              <span className="text-slate-400 text-sm leading-relaxed">
-                Aceito os{" "}
-                <span className="text-emerald-400 hover:underline cursor-pointer">
-                  termos de uso
-                </span>{" "}
-                e{" "}
-                <span className="text-emerald-400 hover:underline cursor-pointer">
-                  política de privacidade
-                </span>{" "}
-                da VipeSocial.
-              </span>
-            </label>
+            <section className="flex items-start gap-3 cursor-pointer group fade-up delay-10">
+              <TermsCheckbox value={agreed} onChange={setAgreed} />
+            </section>
 
-            {/* Submit */}
-            <div className="fade-up delay-11">
+            {/* Botão de submit e link login */}
+            <div className="relative flex flex-col items-center fade-up delay-11">
               <button
                 type="submit"
                 disabled={loading}
-                className="relative w-full py-3.5 rounded-xl font-bold text-sm text-[#020617] overflow-hidden group transition-all duration-300 disabled:opacity-70 mt-2"
+                className="relative w-full sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[45%] 4k:w-[40%] py-3 sm:py-3.5 md:py-4 lg:py-4.5 xl:py-5 2xl:py-6 4k:py-8 rounded-xl font-bold text-sm sm:text-base md:text-lg lg:text-xl text-[#020617] overflow-hidden group transition-all duration-300 disabled:opacity-70 mt-2"
                 style={{
                   background:
                     "linear-gradient(135deg, #10b981 0%, #059669 100%)",
@@ -403,7 +490,7 @@ export default function RegisterPage() {
                 )}
               </button>
 
-              <p className="text-center text-sm text-slate-400 mt-5">
+              <p className="text-center text-xs sm:text-sm md:text-base text-slate-400 mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8 2xl:mt-9 4k:mt-10">
                 Já tem uma conta?{" "}
                 <Link href={"/auth/login"}>
                   <span className="text-emerald-400 font-semibold hover:underline cursor-pointer">
@@ -413,8 +500,15 @@ export default function RegisterPage() {
               </p>
             </div>
           </form>
-        </div>
+        </section>
+
+        {/* Linha neon inferior */}
+        <section className="pt-5 pb-5 sm:pt-6 sm:pb-6 md:pt-7 md:pb-7 lg:pt-8 lg:pb-8 xl:pt-9 xl:pb-9 2xl:pt-10 2xl:pb-10 4k:pt-12 4k:pb-12">
+          <NeonAccentLine />
+        </section>
       </div>
     </main>
   );
-}
+};
+
+export default RegisterPage;
