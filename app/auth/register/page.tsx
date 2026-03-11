@@ -50,7 +50,7 @@ const RegisterPage = () => {
         </section>
 
         {/* Header */}
-        <section>
+        <section className="fade-up delay-1">
           <Header
             firstSmallTitle="Nova Conta"
             secondBigTitleWhite="Comece a "
@@ -87,7 +87,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Idade + Cidade */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 ...">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 fade-up delay-3">
               <FieldInput
                 label="Idade"
                 type="number"
@@ -103,7 +103,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Email */}
-            <section className="fade-up delay-3">
+            <section className="fade-up delay-4">
               <FieldInput
                 label="E-Mail"
                 type="email"
@@ -113,7 +113,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Senha e Confirmar Senha */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-4">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
               <FieldInput
                 label="Senha"
                 type="password"
@@ -127,7 +127,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Nascimento + Gênero */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-6">
               <FieldInput
                 label="Data de nascimento"
                 type="date"
@@ -145,7 +145,7 @@ const RegisterPage = () => {
             </section>
 
             {/* País + Contato */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-7">
               <FieldInput
                 label="País / Localização"
                 type="text"
@@ -166,11 +166,11 @@ const RegisterPage = () => {
             </section>
 
             {/* Foto de perfil + Bio */}
-            <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-6">
+            <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-8">
               <div className="shrink-0 w-full sm:w-auto">
                 <ImageUpload onChange={(file) => setAvatar(file)} />
               </div>
-              <section className="flex-1 fade-up delay-7">
+              <section className="flex-1 fade-up delay-8">
                 <FieldInput
                   label="Biografia"
                   type="textarea"
@@ -180,7 +180,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Redes Sociais */}
-            <section className="fade-up delay-7">
+            <section className="fade-up delay-9">
               <label className={labelClass}>Redes sociais</label>
               <section className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-7 4k:gap-8">
                 {socialMedias.map(({ label, icon: Icon }) => (
@@ -194,7 +194,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Interesses */}
-            <section className="fade-up delay-8">
+            <section className="fade-up delay-10">
               <FieldInput
                 label="Interesses / Categorias"
                 placeholder="ex: tecnologia, humor, lifestyle, finanças..."
@@ -208,7 +208,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Tipo de conta */}
-            <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10">
+            <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-11">
               <AccountTypePicker
                 value={accountType}
                 onChange={setAccountType}
@@ -216,18 +216,18 @@ const RegisterPage = () => {
             </section>
 
             {/* Termos */}
-            <section className="flex items-start gap-3 cursor-pointer group fade-up delay-10">
+            <section className="flex items-start gap-3 cursor-pointer group fade-up delay-12">
               <TermsCheckbox value={agreed} onChange={setAgreed} />
             </section>
 
             {/* Botão de submit e link login */}
-            <div className="relative flex flex-col items-center fade-up delay-11">
+            <div className="relative flex flex-col items-center fade-up delay-14">
               <section className="w-full lg:w-[70%] xl:w-[65%] 2xl:w-[60%] 4k:w-[50%]">
                 <SubmitButton title="Criar conta" size="full" />
               </section>
 
               {/* Login Prompt */}
-              <section>
+              <section className="fade-up delay-14">
                 <LoginPrompt href="/auth/login" linkText="Entrar agora" />
               </section>
             </div>

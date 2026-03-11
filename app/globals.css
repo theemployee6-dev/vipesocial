@@ -160,3 +160,15 @@ input[type="password"]::-ms-clear {
   animation-delay: 0.55s;
   opacity: 0;
 }
+.delay-12 {
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+.delay-13 {
+  animation-delay: 0.65s;
+  opacity: 0;
+}
+.delay-14 {
+  animation-delay: 0.7s;
+  opacity: 0;
+}
