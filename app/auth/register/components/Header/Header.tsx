@@ -27,7 +27,7 @@ const Header = ({
           {secondBigTitleWhite}
           <span className="text-emerald-400">{secondBigTitleGreen}</span>
         </h1>
-        <p className="text-slate-400 text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl 2xl:text-3xl 4k:text-4xl">
+        <p className="text-slate-400 pt-5 text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl 2xl:text-3xl 4k:text-4xl">
           {subTitle}
         </p>
       </div>

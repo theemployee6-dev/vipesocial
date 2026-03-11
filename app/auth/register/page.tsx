@@ -60,7 +60,7 @@ const RegisterPage = () => {
         </section>
 
         {/* Divisor: Informações pessoais */}
-        <section className="pt-3 sm:pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 4k:pt-10">
+        <section className="pt-0 sm:pt-2 md:pt-3 lg:pt-4 xl:pt-5 2xl:pt-6 4k:pt-7">
           <SectionDivider title="Informações pessoais" />
         </section>
 
