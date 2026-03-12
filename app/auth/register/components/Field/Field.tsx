@@ -172,8 +172,11 @@ export default function FieldInput({
           </button>
         )}
       </div>
-
-      {error && <p className="text-sm 2xl:text-base text-red-400">{error}</p>}
+      {error && (
+        <p className="text-xs sm:text-sm lg:text-base 2xl:text-lg 4k:text-xl text-red-400">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

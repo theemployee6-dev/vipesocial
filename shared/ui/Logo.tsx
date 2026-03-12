@@ -7,9 +7,10 @@ const Logo = () => {
         src="/assets/img/logo/logo_transparent.png"
         alt="logo-image"
         fill
+        sizes="(max-width: 768px) 100px, 150px"
         className="object-contain"
         priority
-        quality={85}
+        quality={75}
       />
     </div>
   );
