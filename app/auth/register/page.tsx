@@ -1,11 +1,11 @@
 "use client";
 
+// React e hooks
 import { useState } from "react";
-import GlowBackground from "@/shared/ui/GlowBackground";
-import NeonAccentLine from "./components/ui/TopAccentLine";
-import Header from "./components/Header/Header";
-import SectionDivider from "./components/ui/SectionDivider";
+import { useForm, useWatch } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+// Ícones
 import {
   AtIcon,
   CalendarIcon,
@@ -16,18 +16,27 @@ import {
   PhoneIcon,
   UserIcon,
 } from "@phosphor-icons/react";
+
+// Componentes
+import GlowBackground from "@/shared/ui/GlowBackground";
+import NeonAccentLine from "./components/ui/TopAccentLine";
+import Header from "./components/Header/Header";
+import SectionDivider from "./components/ui/SectionDivider";
 import FieldInput from "./components/Field/Field";
-import { fieldInputGeneroSelectOptions } from "./components/Field/constants/fieldInputGeneroSelectOptions";
 import ImageUpload from "./components/ImageUpload/ImageUpload";
-import { socialMedias } from "./utils/socialStringAndIcons";
-import { labelClass } from "./styles/formClasses";
 import AccountTypePicker from "./components/AccountTypePicker/AccountTypePicker";
 import TermsCheckbox from "./components/TermsCheckbox/TermsCheckbox";
 import SubmitButton from "./components/SubmitButton/SubmitButton";
 import LoginPrompt from "./components/LoginPrompt/LoginPrompt";
-import { useForm, useWatch } from "react-hook-form";
+
+// Constantes e utilitários
+import { fieldInputGeneroSelectOptions } from "./components/Field/constants/fieldInputGeneroSelectOptions";
+import { socialMedias } from "./schemas/constants/socialStringAndIcons";
+import { labelClass } from "./styles/formClasses";
+
+// Schemas e tipos
 import { RegisterFormData, registerSchema } from "./schemas/registerSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { brazilianStatesOptions } from "./utils/brazilianStatesOptions";
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -76,7 +85,9 @@ const RegisterPage = () => {
     const payload = { ...data, age };
     // Aqui você pode enviar os dados para uma server action
     console.log("Dados do Formulário: ", payload);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
   };
 
   return (
@@ -169,16 +180,28 @@ const RegisterPage = () => {
               />
             </section>
 
-            {/* Cidade + Gênero */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
-              <FieldInput
-                label="Cidade"
-                type="text"
-                placeholder="São Paulo-sp"
-                icon={<MapPinIcon size={20} />}
-                registration={register("city")}
-                error={errors.city?.message}
-              />
+            {/* Cidade + UF + Gênero */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 fade-up delay-5">
+              {/* Cidade + UF — sempre juntos */}
+              <div className="grid grid-cols-[1fr_80px] sm:grid-cols-[1fr_90px] lg:grid-cols-[1fr_100px] gap-2 sm:gap-3">
+                <FieldInput
+                  label="Cidade"
+                  type="text"
+                  placeholder="Ex: São Paulo"
+                  icon={<MapPinIcon size={20} />}
+                  registration={register("city")}
+                  error={errors.city?.message}
+                />
+                <FieldInput
+                  label="UF"
+                  type="select"
+                  options={brazilianStatesOptions}
+                  registration={register("uf")}
+                  error={errors.uf?.message}
+                />
+              </div>
+
+              {/* Gênero — ao lado no desktop, abaixo no mobile */}
               <FieldInput
                 label="Gênero"
                 type="select"

@@ -41,23 +41,34 @@ h2,
   font-family: "Poppins", sans-serif;
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 4px;
+  height: 4px; /* para scroll horizontal */
+  transition: width 0.2s ease;
 }
 
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: #0f172a;
 }
-html::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb {
+
+*::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 2px;
 }
-html::-webkit-scrollbar-thumb:hover,
-body::-webkit-scrollbar-thumb:hover {
+
+*::-webkit-scrollbar-thumb:hover {
   background: #10b981;
+  width: 8px;
+}
+
+*:hover::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0f172a;
 }
 
 /* Esconde o ícone nativo do calendário */

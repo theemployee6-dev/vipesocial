@@ -49,8 +49,8 @@ export default function FieldInput({
   // ─── Padding em um único bloco, sem conflitos ───────────────────
   const leftPad =
     icon && iconPosition === "left" && !isSelect
-      ? "pl-10 sm:pl-11 2xl:pl-12"
-      : "pl-3 sm:pl-4 2xl:pl-5";
+      ? "pl-9 sm:pl-10 md:pl-11 lg:pl-12 xl:pl-14 2xl:pl-16 4k:pl-20"
+      : "pl-2 sm:pl-3 md:pl-2 lg:pl-5 xl:pl-6 2xl:pl-8 4k:pl-10";
 
   const rightPad = (() => {
     if (isPassword) return "pr-12";

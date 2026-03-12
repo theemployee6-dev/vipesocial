@@ -1,1 +1,9 @@
 export const phoneRegex = /^\+?[\d\s\(\)\-]{8,20}$/;
+export const cityRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+export const usernameRegex = /^[a-zA-Z0-9]([._-]?[a-zA-Z0-9])*[a-zA-Z0-9]?$/;
+export const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+export const countryRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+export const passwordCapitalLetterRegex = /[A-Z]/;
+export const passwordLowercaseLetterRegex = /[a-z]/;
+export const passwordNumbersRegex = /[0-9]/;
+export const passwordSpecialCharRegex = /[^A-Za-z0-9]/;
