@@ -11,7 +11,6 @@ import {
   CalendarIcon,
   CaretDownIcon,
   EnvelopeIcon,
-  HashIcon,
   HeartIcon,
   MapPinIcon,
   PhoneIcon,
@@ -41,8 +40,7 @@ const RegisterPage = () => {
     setValue,
     control,
   } = useForm<RegisterFormData>({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(registerSchema) as any,
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       accountType: "pessoal",
       agreedToTerms: false, //false
@@ -53,12 +51,31 @@ const RegisterPage = () => {
 
   const accountType = useWatch({ control, name: "accountType" });
   const agreed = useWatch({ control, name: "agreedToTerms" });
-  // const avatarFile = watch("avatar");
+  //const avatarFile = useWatch({ control, name: "avatar" });
+
+  //calcular idade pelo ano
+  function calculateAge(birthDate: string): number {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birth.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }
 
   const onSubmit = async (data: RegisterFormData) => {
     setLoading(true);
+    const age = calculateAge(data.birthDate);
+    const payload = { ...data, age };
     // Aqui você pode enviar os dados para uma server action
-    console.log("Dados do Formulário: ", data);
+    console.log("Dados do Formulário: ", payload);
     setLoading(false);
   };
 
@@ -112,28 +129,8 @@ const RegisterPage = () => {
               />
             </section>
 
-            {/* Idade + Cidade */}
+            {/* Nascimento e Email */}
             <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 fade-up delay-3">
-              <FieldInput
-                label="Idade"
-                type="number"
-                placeholder="18"
-                icon={<HashIcon size={20} />}
-                registration={register("age")}
-                error={errors.age?.message}
-              />
-              <FieldInput
-                label="Cidade"
-                type="text"
-                placeholder="São Paulo"
-                icon={<MapPinIcon size={20} />}
-                registration={register("city")}
-                error={errors.city?.message}
-              />
-            </section>
-
-            {/* Email */}
-            <section className="fade-up delay-4">
               <FieldInput
                 label="E-Mail"
                 type="email"
@@ -142,10 +139,20 @@ const RegisterPage = () => {
                 registration={register("email")}
                 error={errors.email?.message}
               />
+
+              <FieldInput
+                label="Data de nascimento"
+                type="date"
+                icon={<CalendarIcon size={20} />}
+                iconPosition="right"
+                placeholder="dd/mm/aa"
+                registration={register("birthDate")}
+                error={errors.birthDate?.message}
+              />
             </section>
 
             {/* Senha e Confirmar Senha */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-4">
               <FieldInput
                 label="Senha"
                 type="password"
@@ -162,16 +169,15 @@ const RegisterPage = () => {
               />
             </section>
 
-            {/* Nascimento + Gênero */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-6">
+            {/* Cidade + Gênero */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-5">
               <FieldInput
-                label="Data de nascimento"
-                type="date"
-                icon={<CalendarIcon size={20} />}
-                iconPosition="right"
-                placeholder="dd/mm/aa"
-                registration={register("birthDate")}
-                error={errors.birthDate?.message}
+                label="Cidade"
+                type="text"
+                placeholder="São Paulo-sp"
+                icon={<MapPinIcon size={20} />}
+                registration={register("city")}
+                error={errors.city?.message}
               />
               <FieldInput
                 label="Gênero"
@@ -185,7 +191,7 @@ const RegisterPage = () => {
             </section>
 
             {/* País + Contato */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-7">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8 4k:gap-10 fade-up delay-6">
               <FieldInput
                 label="País / Localização"
                 type="text"
@@ -210,7 +216,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Foto de perfil + Bio */}
-            <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-8">
+            <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-7">
               <div className="shrink-0 w-full sm:w-auto">
                 <ImageUpload
                   onChange={(file) => setValue("avatar", file)}
@@ -286,7 +292,7 @@ const RegisterPage = () => {
             </section>
 
             {/* Botão de submit e link login */}
-            <div className="relative flex flex-col items-center fade-up delay-14">
+            <div className="relative flex flex-col items-center fade-up delay-13">
               <section className="w-full lg:w-[70%] xl:w-[65%] 2xl:w-[60%] 4k:w-[50%]">
                 <SubmitButton
                   title="Criar conta"
