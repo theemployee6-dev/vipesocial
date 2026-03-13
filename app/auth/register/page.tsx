@@ -119,6 +119,7 @@ const RegisterPage = () => {
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
+      alert(`Ocorreu um erro: ${error.message}. Tente novamente.`);
       console.error("Exceção na chamada da action:", error.message);
       // mostrar toast de erro genérico
     } finally {
