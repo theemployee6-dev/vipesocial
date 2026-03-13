@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 // React e hooks
@@ -37,9 +38,12 @@ import { labelClass } from "./styles/formClasses";
 // Schemas e tipos
 import { RegisterFormData, registerSchema } from "./schemas/registerSchema";
 import { brazilianStatesOptions } from "./utils/brazilianStatesOptions";
+import { registerAction } from "./actions/registerAction";
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [uploadKey, setUploadKey] = useState<number>(0);
 
   //react hook form
   const {
@@ -48,11 +52,12 @@ const RegisterPage = () => {
     formState: { errors },
     setValue,
     control,
+    reset,
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       accountType: "pessoal",
-      agreedToTerms: false, //false
+      agreedToTerms: false as unknown as true,
       socialMedias: { instagram: "", tiktok: "", youtube: "" },
       avatar: null,
     },
@@ -60,7 +65,7 @@ const RegisterPage = () => {
 
   const accountType = useWatch({ control, name: "accountType" });
   const agreed = useWatch({ control, name: "agreedToTerms" });
-  //const avatarFile = useWatch({ control, name: "avatar" });
+  const avatarFile = useWatch({ control, name: "avatar" });
 
   //calcular idade pelo ano
   function calculateAge(birthDate: string): number {
@@ -81,13 +86,23 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: RegisterFormData) => {
     setLoading(true);
-    const age = calculateAge(data.birthDate);
-    const payload = { ...data, age };
-    // Aqui você pode enviar os dados para uma server action
-    console.log("Dados do Formulário: ", payload);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+
+    const { confirmPassword: _confirmPassword, ...rest } = data;
+
+    const age: number = calculateAge(data.birthDate);
+
+    const result = await registerAction({ ...rest, age });
+
+    if (result.error) {
+      console.error("Error: ", result.error);
+      // mostrar toast de error
+    } else {
+      reset();
+      setUploadKey((prev) => prev + 1);
+      // redirecionar para o dashboard
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -242,6 +257,7 @@ const RegisterPage = () => {
             <section className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-9 4k:gap-10 fade-up delay-7">
               <div className="shrink-0 w-full sm:w-auto">
                 <ImageUpload
+                  key={uploadKey}
                   onChange={(file) => setValue("avatar", file)}
                   error={errors.avatar?.message}
                 />
@@ -303,7 +319,9 @@ const RegisterPage = () => {
                 <TermsCheckbox
                   value={agreed}
                   onChange={(val) =>
-                    setValue("agreedToTerms", val, { shouldValidate: true })
+                    setValue("agreedToTerms", val as unknown as true, {
+                      shouldValidate: true,
+                    })
                   }
                 />
               </div>

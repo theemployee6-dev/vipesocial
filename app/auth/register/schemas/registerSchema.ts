@@ -18,9 +18,9 @@ export const accountTypeEnum = ["pessoal", "criador", "marca"] as const;
 export type AccountType = (typeof accountTypeEnum)[number];
 
 const socialMediasSchema = z.object({
-  instagram: z.union([z.string()]).optional(),
-  tiktok: z.union([z.string()]).optional(),
-  youtube: z.union([z.string()]).optional(),
+  instagram: z.string().max(100, "Muito longo").optional(),
+  tiktok: z.string().max(100, "Muito longo").optional(),
+  youtube: z.string().max(100, "Muito longo").optional(),
 });
 
 export const registerSchema = z
@@ -42,7 +42,8 @@ export const registerSchema = z
       .string()
       .min(2, "Cidade deve ter pelo menos 2 caracteres")
       .max(100, "Cidade muito longa")
-      .regex(cityRegex, "Cidade deve conter apenas letras e espaços"),
+      .regex(cityRegex, "Cidade deve conter apenas letras e espaços")
+      .transform((val) => val.toLowerCase()),
 
     uf: z.enum(brazilianStates, {
       error: "Selecione um estado válido",
@@ -107,10 +108,11 @@ export const registerSchema = z
       .string()
       .min(2, "País deve ter pelo menos 2 caracteres")
       .max(100, "País muito longo")
-      .regex(countryRegex, "País deve conter apenas letras e espaços"),
+      .regex(countryRegex, "País deve conter apenas letras e espaços")
+      .transform((val) => val.toLowerCase()),
 
     phone: z
-      .union([z.string().regex(phoneRegex, "Telefone inválido"), z.literal("")])
+      .union([z.string().regex(phoneRegex, "Contato inválido"), z.literal("")])
       .optional(),
 
     avatar: z
@@ -129,23 +131,23 @@ export const registerSchema = z
     bio: z
       .string()
       .min(50, "Biografia deve ter pelo menos 50 caracteres")
-      .max(500, "Biografia deve ter no máximo 300 caracteres"),
+      .max(500, "Biografia deve ter no máximo 500 caracteres")
+      .transform((val) => val.toLowerCase()),
 
     socialMedias: socialMediasSchema.optional(),
 
     interests: z
       .string()
-      .min(20, "Interesses devem ter no mínimo 20 caracteres"),
+      .min(20, "Interesses devem ter no mínimo 20 caracteres")
+      .transform((val) => val.toLowerCase()),
 
     accountType: z.enum(["pessoal", "criador", "marca"], {
       error: "Selecione um tipo de conta",
     }),
 
-    agreedToTerms: z
-      .boolean({ error: "Você deve aceitar os termos de uso" })
-      .refine((val) => val === true, {
-        message: "Você deve aceitar os termos de uso",
-      }),
+    agreedToTerms: z.literal(true, {
+      error: "Você deve aceitar os termos de uso",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não coincidem",
@@ -156,7 +158,7 @@ export type RegisterFormData = z.infer<typeof registerSchema>;
 
 export type RegisterPayload = Omit<
   RegisterFormData,
-  "confirmPassword" | "agreedToTerms" | "avatar"
+  "confirmPassword" | "agreedToTerms" | "avatar" | "password"
 > & {
   avatarUrl?: string;
 };
