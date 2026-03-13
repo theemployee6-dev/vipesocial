@@ -65,7 +65,6 @@ const RegisterPage = () => {
 
   const accountType = useWatch({ control, name: "accountType" });
   const agreed = useWatch({ control, name: "agreedToTerms" });
-  const avatarFile = useWatch({ control, name: "avatar" });
 
   //calcular idade pelo ano
   function calculateAge(birthDate: string): number {
@@ -83,27 +82,6 @@ const RegisterPage = () => {
 
     return age;
   }
-
-  // const onSubmit = async (data: RegisterFormData) => {
-  //   setLoading(true);
-
-  //   const { confirmPassword: _confirmPassword, ...rest } = data;
-
-  //   const age: number = calculateAge(data.birthDate);
-
-  //   const result = await registerAction({ ...rest, age });
-
-  //   if (result.error) {
-  //     console.error("Error: ", result.error);
-  //     // mostrar toast de error
-  //   } else {
-  //     reset();
-  //     setUploadKey((prev) => prev + 1);
-  //     // redirecionar para o dashboard
-  //   }
-
-  //   setLoading(false);
-  // };
 
   const onSubmit = async (data: RegisterFormData) => {
     setLoading(true);
@@ -166,6 +144,7 @@ const RegisterPage = () => {
                 icon={<UserIcon size={20} />}
                 registration={register("fullName")}
                 error={errors.fullName?.message}
+                disabled={loading}
               />
               <FieldInput
                 label="Nome de usuário"
@@ -174,6 +153,7 @@ const RegisterPage = () => {
                 icon={<AtIcon size={20} />}
                 registration={register("username")}
                 error={errors.username?.message}
+                disabled={loading}
               />
             </section>
 
@@ -186,6 +166,7 @@ const RegisterPage = () => {
                 icon={<EnvelopeIcon size={18} />}
                 registration={register("email")}
                 error={errors.email?.message}
+                disabled={loading}
               />
 
               <FieldInput
@@ -196,6 +177,7 @@ const RegisterPage = () => {
                 placeholder="dd/mm/aa"
                 registration={register("birthDate")}
                 error={errors.birthDate?.message}
+                disabled={loading}
               />
             </section>
 
@@ -207,6 +189,7 @@ const RegisterPage = () => {
                 placeholder="••••••••"
                 registration={register("password")}
                 error={errors.password?.message}
+                disabled={loading}
               />
               <FieldInput
                 label="Confirmar Senha"
@@ -214,6 +197,7 @@ const RegisterPage = () => {
                 placeholder="••••••••"
                 registration={register("confirmPassword")}
                 error={errors.confirmPassword?.message}
+                disabled={loading}
               />
             </section>
 
@@ -228,6 +212,7 @@ const RegisterPage = () => {
                   icon={<MapPinIcon size={20} />}
                   registration={register("city")}
                   error={errors.city?.message}
+                  disabled={loading}
                 />
                 <FieldInput
                   label="UF"
@@ -235,6 +220,7 @@ const RegisterPage = () => {
                   options={brazilianStatesOptions}
                   registration={register("uf")}
                   error={errors.uf?.message}
+                  disabled={loading}
                 />
               </div>
 
@@ -247,6 +233,7 @@ const RegisterPage = () => {
                 options={fieldInputGeneroSelectOptions}
                 registration={register("gender")}
                 error={errors.gender?.message}
+                disabled={loading}
               />
             </section>
 
@@ -259,6 +246,7 @@ const RegisterPage = () => {
                 icon={<MapPinIcon size={20} />}
                 registration={register("country")}
                 error={errors.country?.message}
+                disabled={loading}
               />
               <FieldInput
                 label="Contato (opcional)"
@@ -267,6 +255,7 @@ const RegisterPage = () => {
                 icon={<PhoneIcon size={20} />}
                 registration={register("phone")}
                 error={errors.phone?.message}
+                disabled={loading}
               />
             </section>
 
@@ -282,6 +271,7 @@ const RegisterPage = () => {
                   key={uploadKey}
                   onChange={(file) => setValue("avatar", file)}
                   error={errors.avatar?.message}
+                  disabled={loading}
                 />
               </div>
               <section className="flex-1 fade-up delay-8">
@@ -291,6 +281,7 @@ const RegisterPage = () => {
                   placeholder="Conte um pouco sobre você, seu conteúdo e nicho..."
                   registration={register("bio")}
                   error={errors.bio?.message}
+                  disabled={loading}
                 />
               </section>
             </section>
@@ -306,6 +297,7 @@ const RegisterPage = () => {
                     placeholder={label}
                     registration={register(`socialMedias.${name}`)}
                     error={errors.socialMedias?.[name]?.message}
+                    disabled={loading}
                   />
                 ))}
               </section>
@@ -319,6 +311,7 @@ const RegisterPage = () => {
                 icon={<HeartIcon size={20} />}
                 registration={register("interests")}
                 error={errors.interests?.message}
+                disabled={loading}
               />
             </section>
 
@@ -332,6 +325,7 @@ const RegisterPage = () => {
               <AccountTypePicker
                 value={accountType}
                 onChange={(val) => setValue("accountType", val)}
+                disabled={loading}
               />
             </section>
 
@@ -345,6 +339,7 @@ const RegisterPage = () => {
                       shouldValidate: true,
                     })
                   }
+                  disabled={loading}
                 />
               </div>
               {errors.agreedToTerms && (

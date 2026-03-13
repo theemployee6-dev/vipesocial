@@ -21,6 +21,7 @@ interface FieldProps {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   options?: { value: string; label: string }[];
+  disabled?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
@@ -34,6 +35,7 @@ export default function FieldInput({
   icon,
   iconPosition = "left",
   options,
+  disabled = false,
   ...rest
 }: FieldProps) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -86,7 +88,12 @@ export default function FieldInput({
 
         {/* Campo */}
         {isSelect ? (
-          <select className={fieldClass} {...registration} {...rest}>
+          <select
+            className={fieldClass}
+            disabled={disabled}
+            {...registration}
+            {...rest}
+          >
             {options?.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
@@ -98,6 +105,7 @@ export default function FieldInput({
             <input
               type="date"
               className={fieldClass}
+              disabled={disabled}
               style={{
                 color:
                   rest.value || rest.defaultValue ? undefined : "transparent",
@@ -127,6 +135,7 @@ export default function FieldInput({
           <textarea
             placeholder={placeholder}
             className={`${fieldClass} h-24 resize-none leading-relaxed 2xl:h-32`}
+            disabled={disabled}
             {...registration}
             {...rest}
           />
@@ -135,6 +144,7 @@ export default function FieldInput({
             type={inputType}
             placeholder={placeholder}
             className={fieldClass}
+            disabled={disabled}
             {...registration}
             {...rest}
           />
@@ -162,6 +172,7 @@ export default function FieldInput({
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
+            disabled={disabled}
             className="absolute right-4 2xl:right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300"
           >
             {showPassword ? (

@@ -5,25 +5,33 @@ interface TermsCheckboxProps {
   value: boolean;
   onChange: (value: boolean) => void;
   companyName?: string;
+  disabled?: boolean;
 }
 
 export default function TermsCheckbox({
   value,
   onChange,
   companyName = "VipeSocial",
+  disabled,
 }: TermsCheckboxProps) {
+  const handleClick = () => {
+    if (!disabled) {
+      onChange(!value);
+    }
+  };
+
   return (
     <>
       <div
-        className="relative mt-0.5 shrink-0"
-        onClick={() => onChange(!value)}
+        className={`relative mt-0.5 shrink-0 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+        onClick={handleClick}
       >
         <div
           className={`w-5 h-5 rounded-md border transition-all ${
             value
               ? "bg-emerald-400 border-emerald-400"
               : "bg-[#1e293b] border-slate-700 group-hover:border-slate-500"
-          }`}
+          }${disabled ? "opacity-50" : ""}`}
         >
           {value && (
             <CheckIcon
@@ -34,7 +42,9 @@ export default function TermsCheckbox({
           )}
         </div>
       </div>
-      <span className="text-slate-400 text-sm leading-relaxed">
+      <span
+        className={`text-slate-400 text-sm leading-relaxed ${disabled ? "opacity-50" : ""}`}
+      >
         Aceito os{" "}
         <span className="text-emerald-400 hover:underline cursor-pointer">
           termos de uso

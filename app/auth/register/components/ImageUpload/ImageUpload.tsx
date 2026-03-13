@@ -9,6 +9,7 @@ interface ImageUploadProps {
   hint?: string;
   onChange?: (file: File | null) => void; // permite passar null para limpar
   error?: string;
+  disabled?: boolean;
 }
 
 export default function ImageUpload({
@@ -16,6 +17,7 @@ export default function ImageUpload({
   hint = "PNG, JPG ou WEBP · Máx. 5MB",
   onChange,
   error,
+  disabled,
 }: ImageUploadProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -26,6 +28,7 @@ export default function ImageUpload({
   }, [preview]);
 
   function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
+    if (disabled) return;
     const file = e.target.files?.[0];
     if (!file) {
       // Se o usuário cancelar, não faz nada
@@ -40,6 +43,7 @@ export default function ImageUpload({
 
   // Opcional: permitir remover a imagem
   function handleRemove() {
+    if (disabled) return;
     if (preview) {
       URL.revokeObjectURL(preview);
       setPreview(null);
@@ -54,7 +58,7 @@ export default function ImageUpload({
         <div className="relative">
           <label className="cursor-pointer group">
             <div
-              className={`w-16 h-16 rounded-2xl border-2 border-dashed border-slate-700 group-hover:border-emerald-400/40 transition-colors flex items-center justify-center overflow-hidden ${
+              className={`w-16 h-16 rounded-2xl border-2 border-dashed border-slate-700 group-hover:border-emerald-400/40 transition-colors flex items-center justify-center overflow-hidden ${disabled ? "border-slate-600 bg-slate-800/50" : "border-slate-700 group-hover:border-emerald-400/40"} ${
                 preview ? "border-solid border-emerald-400/40" : ""
               } ${error ? "border-red-500" : ""}`}
             >
@@ -67,13 +71,19 @@ export default function ImageUpload({
                   className="w-full h-full object-cover rounded-2xl"
                 />
               ) : (
-                <UploadIcon size={18} color="currentColor" weight="regular" />
+                <UploadIcon
+                  size={18}
+                  color="currentColor"
+                  weight="regular"
+                  className={disabled ? "text-slate-600" : ""}
+                />
               )}
             </div>
             <input
               type="file"
               accept="image/png,image/jpeg,image/webp"
               onChange={handleImage}
+              disabled={disabled}
               className="sr-only"
             />
           </label>
@@ -81,17 +91,28 @@ export default function ImageUpload({
             <button
               type="button"
               onClick={handleRemove}
-              className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+              disabled={disabled}
+              className={`absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs ${
+                disabled
+                  ? "bg-slate-600 cursor-not-allowed"
+                  : "bg-red-500 hover:bg-red-600"
+              } text-white`}
             >
               ×
             </button>
           )}
         </div>
         <div>
-          <p className="text-slate-400 text-xs">
+          <p
+            className={`text-slate-400 text-xs ${disabled ? "opacity-50" : ""}`}
+          >
             Clique para enviar uma imagem
           </p>
-          <p className="text-slate-500 text-[10px] mt-0.5">{hint}</p>
+          <p
+            className={`text-slate-500 text-[10px] mt-0.5 ${disabled ? "opacity-50" : ""}`}
+          >
+            {hint}
+          </p>
           {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
         </div>
       </div>
