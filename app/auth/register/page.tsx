@@ -84,25 +84,46 @@ const RegisterPage = () => {
     return age;
   }
 
+  // const onSubmit = async (data: RegisterFormData) => {
+  //   setLoading(true);
+
+  //   const { confirmPassword: _confirmPassword, ...rest } = data;
+
+  //   const age: number = calculateAge(data.birthDate);
+
+  //   const result = await registerAction({ ...rest, age });
+
+  //   if (result.error) {
+  //     console.error("Error: ", result.error);
+  //     // mostrar toast de error
+  //   } else {
+  //     reset();
+  //     setUploadKey((prev) => prev + 1);
+  //     // redirecionar para o dashboard
+  //   }
+
+  //   setLoading(false);
+  // };
+
   const onSubmit = async (data: RegisterFormData) => {
     setLoading(true);
+    try {
+      const { confirmPassword: _confirmPassword, ...rest } = data;
+      const age = calculateAge(data.birthDate);
+      const result = await registerAction({ ...rest, age });
 
-    const { confirmPassword: _confirmPassword, ...rest } = data;
-
-    const age: number = calculateAge(data.birthDate);
-
-    const result = await registerAction({ ...rest, age });
-
-    if (result.error) {
-      console.error("Error: ", result.error);
-      // mostrar toast de error
-    } else {
-      reset();
-      setUploadKey((prev) => prev + 1);
-      // redirecionar para o dashboard
+      if (result.success) {
+        reset();
+        setUploadKey((prev) => prev + 1);
+        // redirecionar
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Exceção na chamada da action:", error.message);
+      // mostrar toast de erro genérico
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
