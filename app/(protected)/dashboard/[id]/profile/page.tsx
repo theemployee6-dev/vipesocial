@@ -1,5 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/util/auth/auth";
 import { getProfile } from "@/lib/util/profile/profile";
+import { routesString } from "@/shared/constants/routesString";
 
 export default async function ProfilePage({
   params,
@@ -11,7 +12,7 @@ export default async function ProfilePage({
   // 1. Autentica e valida o ID
   const { user } = await getAuthenticatedUser({
     id,
-    redirectTo: `/dashboard/${id}/profile`, // se o ID não bater, redireciona para o perfil do usuário
+    redirectTo: `${routesString.dashboard}/${id}${routesString.profile}`, // se o ID não bater, redireciona para o perfil do usuário
   });
 
   // 2. Busca os dados do perfil (usando o ID do usuário, que já garantimos ser o mesmo)

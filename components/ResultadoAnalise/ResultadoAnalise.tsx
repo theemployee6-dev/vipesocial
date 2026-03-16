@@ -1,3 +1,5 @@
+"use client";
+
 import type { VipeFullOutput } from "@/lib/core/domain/vipe.types";
 import { colors } from "./constants/colors.ResultadoAnalise";
 import { useResultadoAnalise } from "./hooks/useResultadoAnalise";
