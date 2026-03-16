@@ -1,0 +1,65 @@
+// components/TermsCheckbox/TermsCheckbox.tsx
+import { CheckIcon } from "@phosphor-icons/react";
+
+interface TermsCheckboxProps {
+  value: boolean;
+  onChange: (value: boolean) => void;
+  companyName?: string;
+  disabled?: boolean;
+  error?: string;
+}
+
+export default function TermsCheckbox({
+  value,
+  onChange,
+  companyName = "VipeSocial",
+  disabled,
+  error,
+}: TermsCheckboxProps) {
+  const handleClick = () => {
+    if (!disabled) {
+      onChange(!value);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-start gap-3 cursor-pointer group">
+        <div
+          className={`relative mt-0.5 shrink-0 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+          onClick={handleClick}
+        >
+          <div
+            className={`w-5 h-5 rounded-md border transition-all ${
+              value
+                ? "bg-emerald-400 border-emerald-400"
+                : "bg-[#1e293b] border-slate-700 group-hover:border-slate-500"
+            }${disabled ? "opacity-50" : ""}`}
+          >
+            {value && (
+              <CheckIcon
+                weight="bold"
+                color="#020617"
+                className="w-full h-full p-0.5"
+              />
+            )}
+          </div>
+        </div>
+        <span
+          className={`text-slate-400 text-sm leading-relaxed ${disabled ? "opacity-50" : ""}`}
+        >
+          Aceito os{" "}
+          <span className="text-emerald-400 hover:underline cursor-pointer">
+            termos de uso
+          </span>{" "}
+          e{" "}
+          <span className="text-emerald-400 hover:underline cursor-pointer">
+            política de privacidade
+          </span>{" "}
+          da {companyName}.
+        </span>
+      </div>
+      {error && <p className="text-sm text-red-400">{error}</p>}
+    </div>
+  );
+}
